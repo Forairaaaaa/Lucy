@@ -84,7 +84,7 @@
 
 
 
-                    <Button 
+                    <ToggleButton 
                         Grid.Column="0"
                         
                         Width="168"
@@ -99,8 +99,8 @@
                         
                         Command="{x:Bind ViewModel.GoPageSettingsCommand}"
                         >
-                        CLOSED 😴😴
-                    </Button>
+                        😴 Closed
+                    </ToggleButton>
 
 
                     <DropDownButton 
@@ -109,7 +109,7 @@
                         Content="🍊 COM23"
                         
                         CornerRadius="8"
-                        Margin="6, 0, 0, 0"
+                        Margin="6, 0, 6, 0"
                         Opacity="0.8"
                         
                         FontSize="14"
@@ -133,7 +133,7 @@
                         Content="🍐 115200"
                         
                         CornerRadius="8"
-                        Margin="6, 0, 0, 0"
+                        Margin="6, 0, 6, 0"
                         Opacity="0.8"
                         
                         FontSize="14"
