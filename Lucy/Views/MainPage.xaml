@@ -96,6 +96,8 @@
                         FontSize="14"
                         FontWeight="Medium"
                         FontFamily="Cascadia Code"
+                        
+                        Command="{x:Bind ViewModel.GoPageSettingsCommand}"
                         >
                         CLOSED 😴😴
                     </Button>
