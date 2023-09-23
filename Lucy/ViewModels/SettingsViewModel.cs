@@ -8,7 +8,7 @@ using Lucy.Contracts.Services;
 using Lucy.Helpers;
 
 using Microsoft.UI.Xaml;
-
+using Microsoft.UI.Xaml.Navigation;
 using Windows.ApplicationModel;
 
 namespace Lucy.ViewModels;
@@ -28,7 +28,20 @@ public partial class SettingsViewModel : ObservableRecipient
         get;
     }
 
-    public SettingsViewModel(IThemeSelectorService themeSelectorService)
+    [ObservableProperty]
+    private bool isBackEnabled;
+
+    public ICommand GoPageMainCommand
+    {
+        get;
+    }
+
+    public INavigationService NavigationService
+    {
+        get;
+    }
+
+    public SettingsViewModel(IThemeSelectorService themeSelectorService, INavigationService navigationService)
     {
         _themeSelectorService = themeSelectorService;
         _elementTheme = _themeSelectorService.Theme;
@@ -43,6 +56,12 @@ public partial class SettingsViewModel : ObservableRecipient
                     await _themeSelectorService.SetThemeAsync(param);
                 }
             });
+
+
+        NavigationService = navigationService;
+        NavigationService.Navigated += OnNavigated;
+
+        GoPageMainCommand = new RelayCommand(OnGoPageMain);
     }
 
     private static string GetVersionDescription()
@@ -62,4 +81,8 @@ public partial class SettingsViewModel : ObservableRecipient
 
         return $"🌕{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
     }
+
+    private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
+
+    private void OnGoPageMain() => NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
 }

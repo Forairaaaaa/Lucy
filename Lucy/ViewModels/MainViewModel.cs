@@ -12,9 +12,15 @@ public partial class MainViewModel : ObservableRecipient
     [ObservableProperty]
     private bool isBackEnabled;
 
-    public ICommand GoPageSettingsCommand { get; }
+    public ICommand GoPageSettingsCommand 
+    { 
+        get; 
+    }
 
-    public INavigationService NavigationService { get; }
+    public INavigationService NavigationService
+    { 
+        get; 
+    }
 
     public MainViewModel(INavigationService navigationService)
     {

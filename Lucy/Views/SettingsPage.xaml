@@ -11,12 +11,24 @@
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </Page.Resources>
     <Grid
-        Padding="32"
+        Padding="32, 32, 12, 12"
         >
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
+        <Button 
+            Grid.Row="2"
+            Background="Transparent"
+            BorderThickness="0"
+            HorizontalAlignment="Right"
+            
+            Command="{x:Bind ViewModel.GoPageMainCommand}"
+            >
+            <FontIcon Glyph="&#xE80F;" />
+        </Button>
 
         <TextBlock
             Grid.Row="0"
