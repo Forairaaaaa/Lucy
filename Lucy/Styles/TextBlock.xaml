@@ -17,6 +17,7 @@
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
+    <!-- https://github.com/microsoft/microsoft-ui-xaml/issues/8396 -->
     <Style BasedOn="{StaticResource DefaultMenuFlyoutPresenterStyle}" TargetType="MenuFlyoutPresenter">
         <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
     </Style>

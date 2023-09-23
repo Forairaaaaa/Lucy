@@ -58,7 +58,7 @@
                         Margin="0, 4, 0, 0" 
                         VerticalAlignment="Center"
                         FontSize="16"
-                        FontWeight="Light"
+                        FontWeight="Medium"
                         FontFamily="Cascadia Code"
                         FontStyle="Italic"
                         Opacity="0.8"
@@ -94,6 +94,7 @@
                         Opacity="0.8"
 
                         FontSize="14"
+                        FontWeight="Medium"
                         FontFamily="Cascadia Code"
                         >
                         CLOSED 😴😴
@@ -110,6 +111,7 @@
                         Opacity="0.8"
                         
                         FontSize="14"
+                        FontWeight="Medium"
                         FontFamily="Cascadia Code"
                         >
                         <DropDownButton.Flyout>
@@ -133,6 +135,7 @@
                         Opacity="0.8"
                         
                         FontSize="14"
+                        FontWeight="Medium"
                         FontFamily="Cascadia Code"
                         >
                         <DropDownButton.Flyout>
