@@ -11,6 +11,6 @@
     PersistenceId="MainWindow"
     mc:Ignorable="d">
     <Window.SystemBackdrop>
-        <DesktopAcrylicBackdrop/>
+        <MicaBackdrop/>
     </Window.SystemBackdrop>
 </windowex:WindowEx>

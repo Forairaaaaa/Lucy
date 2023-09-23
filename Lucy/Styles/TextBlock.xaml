@@ -17,4 +17,8 @@
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
+    <Style BasedOn="{StaticResource DefaultMenuFlyoutPresenterStyle}" TargetType="MenuFlyoutPresenter">
+        <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+    </Style>
+
 </ResourceDictionary>
