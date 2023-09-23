@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "Lucy (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "Lucy (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}

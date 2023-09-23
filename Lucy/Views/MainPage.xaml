@@ -1,0 +1,82 @@
+﻿<Page
+    x:Class="Lucy.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="Transparent"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="72" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <!-- Title bar -->
+        <Grid Grid.Row="0" x:Name="MainPageTitleBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Avatar -->
+            <PersonPicture Grid.Column="0" 
+                           Height="48"
+                           Margin="16, 0, 0, 0"
+                           Initials="啊?"
+                           ProfilePicture="https://i1.hdslb.com/bfs/face/548fa2f64195cd9fe4935244e13673bc202d051c.jpg"
+            ></PersonPicture>
+
+            
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <!-- Row top -->
+                <Grid Grid.Row="0">
+                    <!-- Title -->
+                    <TextBlock
+                        Margin="12, 0, 0, 0" 
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        >🌕</TextBlock>
+                    <TextBlock
+                        Margin="36, 4, 0, 0" 
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        FontWeight="Light"
+                        FontFamily="Cascadia Code"
+                        FontStyle="Italic"
+                        Opacity="0.8"
+                        >
+                        <Span>lucy</Span>
+                        <Span FontSize="12">Serial-Monitor</Span>
+                    </TextBlock>
+                </Grid>
+
+
+
+                <!-- Row bottom -->
+                <Grid Grid.Row="1">
+                    <!-- Control pannel -->
+                </Grid>
+
+
+                
+                
+            </Grid>
+            
+            
+
+            
+        </Grid>
+    
+    
+    
+        
+    </Grid>
+</Page>
