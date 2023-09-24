@@ -86,14 +86,49 @@ namespace Lucy.ViewModels
                 newFlyoutItem.Text = portName;
                 newFlyoutItem.Click += (object sender, RoutedEventArgs e) => 
                 {
-                    // Update selected port 
-                    SelectedPortName = newFlyoutItem.Text;
-
-                    // Update service 
-                    _serialPortService.PortName = SelectedPortName;
+                    // Call handler 
+                    OnUpdateSelectedPort(newFlyoutItem.Text);
                 };
                 // Push into flyout
                 AvailablePortsFlyout.Items.Add(newFlyoutItem);
+            }
+        }
+
+        private void OnUpdateSelectedPort(string selectedPortName)
+        {
+            // If already opened 
+            if (_serialPortService.IsOpened)
+            {
+                // Don't know why it's false
+                //var shit2 = App.GetService<MainPageTitleBar>().SwitchOpenPort.IsOn;
+                //Console.WriteLine(shit2);
+
+                // Try close 
+                if (!_serialPortService.Close())
+                {
+                    return;
+                }
+
+                // Update selected port 
+                SelectedPortName = selectedPortName;
+
+                // Update service 
+                _serialPortService.PortName = SelectedPortName;
+
+                // Reset switch (kinf of failed to do that, don't know why it's false already, set to false again doesn't change the ui
+
+                // But if I set it true here
+                // This will trigger the toggle event and open the port
+                // It kind of achieve the hot port changing... 
+                App.GetService<MainPageTitleBar>().SwitchOpenPort.IsOn = true;
+            }
+            else
+            {
+                // Update selected port 
+                SelectedPortName = selectedPortName;
+
+                // Update service 
+                _serialPortService.PortName = SelectedPortName;
             }
         }
 

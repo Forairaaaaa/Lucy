@@ -17,6 +17,7 @@
 
         <!-- Serial port open switch -->
         <ToggleSwitch
+            x:Name="ToggleSwitchOpenPort"
             Grid.Column="0"
             
             Toggled="ToggleSwitch_Toggled"

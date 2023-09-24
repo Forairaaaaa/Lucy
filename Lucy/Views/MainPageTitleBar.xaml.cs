@@ -26,6 +26,11 @@ namespace Lucy.Views
             get;
         }
 
+        public ToggleSwitch SwitchOpenPort
+        {
+            get;
+        }
+
         public MainPageTitleBar()
         {
             ViewModel = App.GetService<MainTitleBarViewModel>();
@@ -33,12 +38,15 @@ namespace Lucy.Views
 
             // Set title bar 
             App.MainWindow.SetTitleBar(TitleBar);
+
+            // Expose the control for control panel
+            SwitchOpenPort = ToggleSwitchOpenPort;
         }
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             var isOn = ((ToggleSwitch)sender).IsOn;
-            //Console.WriteLine(isOn);
+            Console.WriteLine(isOn);
 
             if (isOn)
             {
