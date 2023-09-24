@@ -26,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\MainPageAvatar.xaml" />
+    <None Remove="Views\MainPageControlPanel.xaml" />
     <None Remove="Views\MainPageTitleBar.xaml" />
   </ItemGroup>
 
@@ -63,6 +64,9 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <Page Update="Views\MainPageControlPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\MainPageTitleBar.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
