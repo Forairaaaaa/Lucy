@@ -21,6 +21,12 @@ namespace Lucy.ViewModels
         [ObservableProperty]
         private MenuFlyout availablePortsFlyout;
 
+        [ObservableProperty]
+        private string selectedBaudRate;
+
+        [ObservableProperty]
+        private MenuFlyout availableBaudRateFlyout;
+
         public ICommand UpdateAvailablePorts
         {
             get;
@@ -31,8 +37,10 @@ namespace Lucy.ViewModels
             // Commands
             UpdateAvailablePorts = new RelayCommand(OnUpdateAvailablePorts);
 
-            // Selected port name 
+            // Default value 
             selectedPortName = GetFirstAvailablePort();
+            selectedBaudRate = "115200";
+            availableBaudRateFlyout = GetBaudRateMenuFlyout();
 
             // Available ports flyout
             availablePortsFlyout = new MenuFlyout();
@@ -79,9 +87,55 @@ namespace Lucy.ViewModels
                     // Update selected port 
                     SelectedPortName = newFlyoutItem.Text;
                 };
-                // Push into list
+                // Push into flyout
                 AvailablePortsFlyout.Items.Add(newFlyoutItem);
             }
+        }
+
+        private MenuFlyout GetBaudRateMenuFlyout()
+        {
+            var availableBaudRateFlyout = new MenuFlyout();
+            availableBaudRateFlyout.Placement = Microsoft.UI.Xaml.Controls.Primitives.FlyoutPlacementMode.Bottom;
+
+            string[] baudRatesList = {
+                "300",
+                "600",
+                "1200",
+                "2400",
+                "4800",
+                "9600",
+                "14400",
+                "19200",
+                "38400",
+                "56000",
+                "57600",
+                "115200",
+                "128000",
+                "256000",
+                "460800",
+                "512000",
+                "750000",
+                "921600",
+                "1500000",
+            };
+
+            foreach (var baudRate in baudRatesList)
+            {
+                // New item
+                var newFlyoutItem = new MenuFlyoutItem();
+                // Set text and handle click event
+                newFlyoutItem.Text = baudRate;
+                
+                newFlyoutItem.Click += (object sender, RoutedEventArgs e) =>
+                {
+                    // Update selected baud rate
+                    SelectedBaudRate = newFlyoutItem.Text;
+                };
+                // Push into flyout
+                availableBaudRateFlyout.Items.Add(newFlyoutItem);
+            }
+
+            return availableBaudRateFlyout;
         }
     }
 }
