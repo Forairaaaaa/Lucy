@@ -22,8 +22,8 @@ public sealed partial class MainPage : Page
         ViewModel = App.GetService<MainViewModel>();
         InitializeComponent();
 
-        // Set title bar 
-        App.MainWindow.SetTitleBar(MainPageTitleBar);
+        //// Set title bar 
+        //App.MainWindow.SetTitleBar(MainPageTitleBar);
 
 
 

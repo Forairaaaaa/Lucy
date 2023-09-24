@@ -34,10 +34,6 @@
             </views:MainPageAvatar>
             
             
-            
-            
-
-            
             <Grid 
                 Grid.Column="1"
                 >
@@ -45,64 +41,16 @@
                     <RowDefinition Height="32"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-
-                <!-- Row top -->
-                <Grid 
+                
+                
+                <!-- Title bar -->
+                <views:MainPageTitleBar
                     Grid.Row="0"
                     >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                </views:MainPageTitleBar>
 
 
-
-                    <ToggleSwitch
-                        Grid.Column="0"
-                        
-                        
-                        Margin="21, 2, 0, 0"
-                        Opacity="0.8"
-                        VerticalAlignment="Bottom"
-                        
-                        OffContent="_(:з」∠)_"
-                        OnContent=" (ᗜ ‸ ᗜ)"
-                        
-                        
-
-                        FontSize="10"
-                        FontFamily="Cascadia Mono"
-                        >
-                    </ToggleSwitch>
-
-
-
-
-
-                    <!-- Title -->
-                    <Grid
-                        Grid.Column="2"
-                        x:Name="MainPageTitleBar"
-                        >
-                        <TextBlock
-                            Margin="0, 0, 250, 0" 
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontSize="12"
-                            FontWeight="Normal"
-                            FontFamily="Cascadia Code"
-                            FontStyle="Italic"
-                            Opacity="0.8"
-                            >
-                            <!--<Span FontSize="16" FontStyle="Normal">🌕</Span>-->
-                            <Span>Lucy Serial-Monitor</Span>
-                        </TextBlock>
-                    </Grid>
-                    
-                    
-                    
-                </Grid>
+                
 
 
 

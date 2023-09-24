@@ -73,9 +73,13 @@ public partial class App : Application
             services.AddTransient<MainViewModel>();
             services.AddTransient<MainPage>();
 
-            // Avatar in main page 
+            // Avatar of main page 
             services.AddTransient<MainAvatarViewModel>();
             services.AddTransient<MainPageAvatar>();
+
+            // Title bar of main page 
+            services.AddTransient<MainTitleBarViewModel>();
+            services.AddTransient<MainPageTitleBar>();
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
