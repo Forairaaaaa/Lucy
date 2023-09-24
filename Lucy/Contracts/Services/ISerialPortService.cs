@@ -22,12 +22,9 @@ public interface ISerialPortService
         get; set; 
     }
 
-
     bool Open();
 
     bool Close();
 
     bool Write(string message);
-
-    string ReadLine(string message);
 }

@@ -35,13 +35,20 @@ public class SerialPortService : ISerialPortService
 
     private readonly SerialPort _serialPort;
 
+    private bool _isReading = false;
+    private Thread? _readingThread;
+
     /// <summary>
     /// Constructor 
     /// </summary>
     public SerialPortService()
     {
         // Create instance 
-        _serialPort = new SerialPort();
+        _serialPort = new SerialPort
+        {
+            ReadTimeout = 1000,
+            WriteTimeout = 1000
+        };
 
         // Default value 
         PortName = "COM1";
@@ -59,10 +66,15 @@ public class SerialPortService : ISerialPortService
             return true;
         }
         
-        // Try open 
         try 
         {
+            // Try open port 
             _serialPort.Open();
+
+            // Start reading thread 
+            _isReading = true;
+            _readingThread = new Thread(ReadingSerial);
+            _readingThread.Start();
         } 
         catch (Exception ex)
         {
@@ -83,10 +95,14 @@ public class SerialPortService : ISerialPortService
         {
             return true;
         }
-
-        // Try close 
+ 
         try
         {
+            // Stop reading thread and wait 
+            _isReading = false;
+            _readingThread?.Join();
+
+            // Try close 
             _serialPort.Close();
         }
         catch (Exception ex)
@@ -130,13 +146,25 @@ public class SerialPortService : ISerialPortService
         return true;
     }
 
-    /// <summary>
-    /// Read message 
-    /// </summary>
-    /// <param name="message"></param>
-    /// <returns></returns>
-    public string ReadLine(string message)
+    private void ReadingSerial()
     {
-        return "???";
+        while (_isReading)
+        {
+            try
+            {
+                if (_serialPort.BytesToRead > 0)
+                {
+                    var message = _serialPort.ReadLine();
+                    Console.WriteLine(message);
+
+                    // TODO
+                    // Update callback
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
