@@ -33,10 +33,16 @@ public class SerialPortService : ISerialPortService
         }
     }
 
+    // Serial port 
     private readonly SerialPort _serialPort;
 
+    // Reading flag 
     private bool _isReading = false;
+    // Reading thread 
     private Thread? _readingThread;
+
+    // Message received event handler 
+    public event EventHandler<string>? MessageReceived;
 
     /// <summary>
     /// Constructor 
@@ -155,10 +161,10 @@ public class SerialPortService : ISerialPortService
                 if (_serialPort.BytesToRead > 0)
                 {
                     var message = _serialPort.ReadLine();
-                    Console.WriteLine(message);
+                    //Console.WriteLine(message);
 
-                    // TODO
-                    // Update callback
+                    // Fire event
+                    MessageReceived?.Invoke(this, message);
                 }
             }
             catch(Exception ex)

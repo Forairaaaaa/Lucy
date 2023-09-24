@@ -27,4 +27,6 @@ public interface ISerialPortService
     bool Close();
 
     bool Write(string message);
+
+    event EventHandler<string>? MessageReceived;
 }

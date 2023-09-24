@@ -10,20 +10,29 @@
 
     <Grid>
         <ScrollViewer
-            IsTabStop="True"
+            x:Name="ScrollViewerReceivedMessage"
+            
             Margin="0, 12, 0, 0"
+            
             Opacity="0.9"
+            IsTabStop="True"
             >
-            <RichTextBlock
-                x:Name="SerialReceiveTextBlock"
+
+            <!-- Text="{x:Bind ViewModel.ReceivedMessage, Mode=OneWay}" -->
+            <TextBlock
+                x:Name="TextBlockReceivedMessage"
                 Padding="18, 0, 18, 0"
-        
+                
+                IsTextSelectionEnabled="True"
+    
                 FontSize="15"
                 FontWeight="SemiLight"
                 FontFamily="Cascadia Mono"
                 LineHeight="26"
                 >
-            </RichTextBlock>
+            </TextBlock>
+            
+
         </ScrollViewer>
     </Grid>
 </UserControl>
