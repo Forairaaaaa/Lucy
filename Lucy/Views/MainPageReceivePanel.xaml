@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Lucy.Views.MainPageReceivePanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lucy.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <ScrollViewer
+            IsTabStop="True"
+            Margin="0, 12, 0, 0"
+            Opacity="0.9"
+            >
+            <RichTextBlock
+                x:Name="SerialReceiveTextBlock"
+                Padding="18, 0, 18, 0"
+        
+                FontSize="15"
+                FontWeight="SemiLight"
+                FontFamily="Cascadia Mono"
+                LineHeight="26"
+                >
+            </RichTextBlock>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

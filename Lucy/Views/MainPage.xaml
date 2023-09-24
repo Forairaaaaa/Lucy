@@ -61,37 +61,16 @@
         </Grid>
 
 
-
-
-
-
-
         <!-- Serial receive pannel -->
-        <ScrollViewer 
+        <views:MainPageReceivePanel
             Grid.Row = "1"
-            
-            IsTabStop="True"
-            Margin="0, 12, 0, 0"
-            Opacity="0.9"
             >
-            <RichTextBlock
-                x:Name="SerialReceiveTextBlock"
-                Padding="18, 0, 18, 0"
-                
-                FontSize="15"
-                FontWeight="SemiLight"
-                FontFamily="Cascadia Mono"
-                LineHeight="26"
-                ></RichTextBlock>
-        </ScrollViewer>
-
-
+        </views:MainPageReceivePanel>
         
         
         
 
         <!-- Bottom pannel -->
-
         <Grid
             Grid.Row="2"
             Padding="6, 0, 6, 0"
