@@ -73,6 +73,10 @@ public partial class App : Application
             services.AddTransient<MainViewModel>();
             services.AddTransient<MainPage>();
 
+            // Avatar in main page 
+            services.AddTransient<MainAvatarViewModel>();
+            services.AddTransient<MainPageAvatar>();
+
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

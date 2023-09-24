@@ -24,6 +24,9 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl></RepositoryUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\MainPageAvatar.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -59,6 +62,9 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <Page Update="Views\MainPageAvatar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

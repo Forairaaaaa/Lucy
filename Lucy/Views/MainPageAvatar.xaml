@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Lucy.Views.MainPageAvatar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lucy.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!-- Avatar -->
+    <!--Command="{x:Bind ViewModel.GoPageSettingsCommand}"-->
+    <!--ProfilePicture="https://i1.hdslb.com/bfs/face/548fa2f64195cd9fe4935244e13673bc202d051c.jpg"-->
+    <Button 
+        Padding="2"
+        CornerRadius="12"
+        Background="Transparent"
+        BorderThickness="0"
+        
+        Command="{x:Bind ViewModel.GoPageSettingsCommand}"
+        >
+        <PersonPicture
+            Height="54"
+            ProfilePicture="https://media.tenor.com/_RzPjwWKk6YAAAAd/comida.gif"
+        >
+        </PersonPicture>
+    </Button>
+</UserControl>
