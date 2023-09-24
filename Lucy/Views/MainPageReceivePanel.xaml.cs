@@ -35,7 +35,6 @@ namespace Lucy.Views
             ViewModel = App.GetService<MainReceivePanelViewModel>();
             this.InitializeComponent();
 
-
             // Setup timer 
             _updateReceivedMessageTimer = new DispatcherTimer();
             _updateReceivedMessageTimer.Tick += UpdateReceivedMessage;
@@ -43,12 +42,26 @@ namespace Lucy.Views
             _updateReceivedMessageTimer.Start();
         }
 
+        private bool _isNeedToScroll = false;
+
         private void UpdateReceivedMessage(object? sender, object e)
         {
             if (ViewModel.SerialPortService.Available() > 0)
             {
                 TextBlockReceivedMessage.Text += ViewModel.SerialPortService.Read();
-                ScrollViewerReceivedMessage.ScrollToVerticalOffset(ScrollViewerReceivedMessage.ScrollableHeight);
+
+                // Set flag, notice the next tick to scroll to the bottom (without port reading)
+                // Invoke change view here (right after text changed) will not reach the actual bottom 
+                // Need a render to update scrollviewer's properties I guess 
+                _isNeedToScroll = true;
+            }
+
+            // Scroll to bottom 
+            else if (_isNeedToScroll)
+            {
+                ScrollViewerReceivedMessage.ChangeView(null, ScrollViewerReceivedMessage.ScrollableHeight, null);
+                // Reset flag 
+                _isNeedToScroll = false;
             }
         }
     }
