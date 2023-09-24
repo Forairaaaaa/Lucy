@@ -130,9 +130,9 @@ public class SerialPortService : ISerialPortService
         //Console.WriteLine(message.Length);
         //Console.WriteLine(message);
 
-        Console.WriteLine(_serialPort.PortName);
-        Console.WriteLine(_serialPort.BaudRate);
-        Console.WriteLine(message);
+        //Console.WriteLine(_serialPort.PortName);
+        //Console.WriteLine(_serialPort.BaudRate);
+        //Console.WriteLine(message);
 
         if (!IsOpened)
         {
@@ -160,7 +160,7 @@ public class SerialPortService : ISerialPortService
             {
                 if (_serialPort.BytesToRead > 0)
                 {
-                    var message = _serialPort.ReadLine();
+                    var message = _serialPort.ReadExisting();
                     //Console.WriteLine(message);
 
                     // Fire event
@@ -170,6 +170,7 @@ public class SerialPortService : ISerialPortService
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                break;
             }
         }
     }
