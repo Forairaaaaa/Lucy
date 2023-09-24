@@ -19,6 +19,8 @@
         <ToggleSwitch
             Grid.Column="0"
             
+            Toggled="ToggleSwitch_Toggled"
+            
             Margin="21, 2, 0, 0"
             Opacity="0.8"
             VerticalAlignment="Bottom"

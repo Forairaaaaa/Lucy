@@ -17,5 +17,15 @@ namespace Lucy.ViewModels
         {
             _serialPortService = serialPortService;
         }
+
+        public bool OnOpenSerialPort()
+        {
+            return _serialPortService.Open();
+        }
+
+        public bool OnCloseSerialPort()
+        {
+            return _serialPortService.Close();
+        }
     }
 }

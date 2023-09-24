@@ -34,5 +34,26 @@ namespace Lucy.Views
             // Set title bar 
             App.MainWindow.SetTitleBar(TitleBar);
         }
+
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            var isOn = ((ToggleSwitch)sender).IsOn;
+            //Console.WriteLine(isOn);
+
+            if (isOn)
+            {
+                if (!ViewModel.OnOpenSerialPort())
+                {
+                    ((ToggleSwitch)sender).IsOn = false;
+                }
+            }
+            else
+            {
+                if (!ViewModel.OnCloseSerialPort())
+                {
+                    ((ToggleSwitch)sender).IsOn = true;
+                }
+            }
+        }
     }
 }

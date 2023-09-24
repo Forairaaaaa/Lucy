@@ -28,6 +28,7 @@ public class SerialPortService : ISerialPortService
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
             }
         }
     }
@@ -55,7 +56,7 @@ public class SerialPortService : ISerialPortService
     {
         if (IsOpened)
         {
-            return false;
+            return true;
         }
         
         // Try open 
@@ -65,9 +66,11 @@ public class SerialPortService : ISerialPortService
         } 
         catch (Exception ex)
         {
+            Console.WriteLine(ex.Message);
+            return false;
         }
 
-        return IsOpened;
+        return true;
     }
 
     /// <summary>
@@ -78,7 +81,7 @@ public class SerialPortService : ISerialPortService
     {
         if (!IsOpened)
         {
-            return false;
+            return true;
         }
 
         // Try close 
@@ -88,9 +91,11 @@ public class SerialPortService : ISerialPortService
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex.Message);
+            return false;
         }
 
-        return IsOpened;
+        return true;
     }
 
     /// <summary>
@@ -109,16 +114,17 @@ public class SerialPortService : ISerialPortService
 
         if (!IsOpened)
         {
-            try
-            {
-                _serialPort.Write(message);
-            }
-            catch(Exception ex) 
-            {
-                return false;
-            }
+            return false;
+        }
 
-            return true;
+        try
+        {
+            _serialPort.Write(message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
         }
 
         return true;
