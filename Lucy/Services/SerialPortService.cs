@@ -36,13 +36,13 @@ public class SerialPortService : ISerialPortService
     // Serial port 
     private readonly SerialPort _serialPort;
 
-    // Reading flag 
-    private bool _isReading = false;
-    // Reading thread 
-    private Thread? _readingThread;
+    //// Reading flag 
+    //private bool _isReading = false;
+    //// Reading thread 
+    //private Thread? _readingThread;
 
-    // Message received event handler 
-    public event EventHandler<string>? MessageReceived;
+    //// Message received event handler 
+    //public event EventHandler<string>? MessageReceived;
 
     /// <summary>
     /// Constructor 
@@ -77,10 +77,10 @@ public class SerialPortService : ISerialPortService
             // Try open port 
             _serialPort.Open();
 
-            // Start reading thread 
-            _isReading = true;
-            _readingThread = new Thread(ReadingSerial);
-            _readingThread.Start();
+            //// Start reading thread 
+            //_isReading = true;
+            //_readingThread = new Thread(ReadingSerial);
+            //_readingThread.Start();
         } 
         catch (Exception ex)
         {
@@ -104,9 +104,9 @@ public class SerialPortService : ISerialPortService
  
         try
         {
-            // Stop reading thread and wait 
-            _isReading = false;
-            _readingThread?.Join();
+            //// Stop reading thread and wait 
+            //_isReading = false;
+            //_readingThread?.Join();
 
             // Try close 
             _serialPort.Close();
@@ -152,26 +152,56 @@ public class SerialPortService : ISerialPortService
         return true;
     }
 
-    private void ReadingSerial()
+    //private void ReadingSerial()
+    //{
+    //    while (_isReading)
+    //    {
+    //        try
+    //        {
+    //            if (_serialPort.BytesToRead > 0)
+    //            {
+    //                var message = _serialPort.ReadExisting();
+    //                //Console.WriteLine(message);
+
+    //                // Fire event
+    //                MessageReceived?.Invoke(this, message);
+    //            }
+    //        }
+    //        catch(Exception ex)
+    //        {
+    //            Console.WriteLine(ex.Message);
+    //            break;
+    //        }
+    //    }
+    //}
+
+    public int Available()
     {
-        while (_isReading)
+        if (_serialPort.IsOpen)
+        {
+            return _serialPort.BytesToRead;
+        }
+
+        return 0;
+    }
+
+    public string Read()
+    {
+        if (_serialPort.IsOpen)
         {
             try
             {
                 if (_serialPort.BytesToRead > 0)
                 {
-                    var message = _serialPort.ReadExisting();
-                    //Console.WriteLine(message);
-
-                    // Fire event
-                    MessageReceived?.Invoke(this, message);
+                    return _serialPort.ReadExisting();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                break;
             }
         }
+
+        return "";
     }
 }

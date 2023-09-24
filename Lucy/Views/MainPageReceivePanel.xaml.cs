@@ -28,26 +28,28 @@ namespace Lucy.Views
             get;
         }
 
+        DispatcherTimer _updateReceivedMessageTimer;
+
         public MainPageReceivePanel()
         {
             ViewModel = App.GetService<MainReceivePanelViewModel>();
             this.InitializeComponent();
 
-            // Handle message recieved event 
-            ViewModel.SerialPortService.MessageReceived += OnMessageReceived;
+
+            // Setup timer 
+            _updateReceivedMessageTimer = new DispatcherTimer();
+            _updateReceivedMessageTimer.Tick += UpdateReceivedMessage;
+            _updateReceivedMessageTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            _updateReceivedMessageTimer.Start();
         }
 
-        private void OnMessageReceived(object? sender, string message)
+        private void UpdateReceivedMessage(object? sender, object e)
         {
-            //Console.WriteLine(message);
-            App.MainWindow.DispatcherQueue.TryEnqueue(() => {
-
-                // Update message 
-                TextBlockReceivedMessage.Text += message;
-
-                // Scroll to bottom 
+            if (ViewModel.SerialPortService.Available() > 0)
+            {
+                TextBlockReceivedMessage.Text += ViewModel.SerialPortService.Read();
                 ScrollViewerReceivedMessage.ScrollToVerticalOffset(ScrollViewerReceivedMessage.ScrollableHeight);
-            });
+            }
         }
     }
 }
