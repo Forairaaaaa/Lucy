@@ -19,17 +19,28 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+            
             <!-- Avatar -->
-            <PersonPicture 
+            <!--Command="{x:Bind ViewModel.GoPageSettingsCommand}"-->
+            <!--ProfilePicture="https://i1.hdslb.com/bfs/face/548fa2f64195cd9fe4935244e13673bc202d051c.jpg"-->
+            <Button 
                 Grid.Column="0" 
                 
-                Height="54"
-                Margin="16, 10, 0, 0"
                 VerticalAlignment="Center"
-                Initials="啊?"
+                Padding="0"
+                Margin="16, 10, 0, 0"
+                CornerRadius="12"
+                Background="Transparent"
+                BorderThickness="0"
                 
-                ProfilePicture="https://i1.hdslb.com/bfs/face/548fa2f64195cd9fe4935244e13673bc202d051c.jpg"
-            ></PersonPicture>
+                Command="{x:Bind ViewModel.GoPageSettingsCommand}"
+                >
+                <PersonPicture
+                    Height="54"
+                    ProfilePicture="https://media.tenor.com/_RzPjwWKk6YAAAAd/comida.gif"
+                >
+                </PersonPicture>
+            </Button>
 
             
             <Grid 
@@ -114,9 +125,6 @@
 
 
 
-                    <!--Command="{x:Bind ViewModel.GoPageSettingsCommand}"-->
-
-
                     <DropDownButton 
                         Grid.Column="0"
     
@@ -133,6 +141,8 @@
                         FontStyle="Italic"
                         FontWeight="Normal"
                         FontFamily="Cascadia Code"
+                        
+                        ToolTipService.ToolTip="Port Name"
                         >
                         <DropDownButton.Flyout>
                             <MenuFlyout Placement="Bottom">
@@ -161,6 +171,8 @@
                         FontStyle="Italic"
                         FontWeight="Normal"
                         FontFamily="Cascadia Code"
+                        
+                        ToolTipService.ToolTip="Baud Rate"
                         >
                         <DropDownButton.Flyout>
                             <MenuFlyout Placement="Bottom">
