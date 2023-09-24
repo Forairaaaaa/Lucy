@@ -89,6 +89,10 @@ public partial class App : Application
             services.AddTransient<MainReceivePanelViewModel>();
             services.AddTransient<MainPageReceivePanel>();
 
+            // Main page's status panel
+            services.AddTransient<MainStatusPanelViewModel>();
+            services.AddTransient<MainPageStatusPanel>();
+
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

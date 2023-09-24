@@ -67,61 +67,13 @@
             >
         </views:MainPageReceivePanel>
         
-        
-        
-
-        <!-- Bottom pannel -->
-        <Grid
+      
+        <!-- Status panel -->
+        <views:MainPageStatusPanel
             Grid.Row="2"
-            Padding="6, 0, 6, 0"
             >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-
-
-            <Button
-                Grid.Column="3"
-    
-                CornerRadius="8"
-                Margin="6, 0, 6, 0"
-                Opacity="0.5"
-                VerticalAlignment="Center"
-                Background="Transparent"
-                BorderThickness="0"
-    
-                FontSize="12"
-                FontStyle="Italic"
-                FontWeight="Normal"
-                FontFamily="Cascadia Code"
-                >
-                CLEAR
-            </Button>
-
-
-            <TextBlock
-                Grid.Column="2"
-                
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Margin="16, 0, 6, 0"
-                
-                FontSize="12"
-                FontWeight="Normal"
-                FontFamily="Cascadia Mono"
-                FontStyle="Italic"
-                Opacity="0.5"
-                >
-                <Span>IO: 114514 - 2333</Span>
-            </TextBlock>
-
-
-        </Grid>
-
-
+        </views:MainPageStatusPanel>
+        
+      
     </Grid>
 </Page>
