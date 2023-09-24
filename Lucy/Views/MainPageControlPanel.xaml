@@ -74,6 +74,8 @@
         <!-- Write message box -->
         <TextBox 
             Grid.Column="3"
+            
+            Text="{x:Bind ViewModel.SendMessageBuffer, Mode=TwoWay}"
         
             MinWidth="168"
             MaxHeight="100"
@@ -96,6 +98,8 @@
         <!-- Send button -->
         <Button
             Grid.Column="4"
+            
+            Command="{x:Bind ViewModel.SendMessage}"
         
             CornerRadius="8"
             Margin="6, 12, 12, 0"

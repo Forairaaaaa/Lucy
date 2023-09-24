@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Lucy.Contracts.Services;
 using Lucy.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -27,42 +28,43 @@ namespace Lucy.ViewModels
         [ObservableProperty]
         private MenuFlyout availableBaudRateFlyout;
 
+        [ObservableProperty]
+        private string sendMessageBuffer;
+
         public ICommand UpdateAvailablePorts
         {
             get;
         }
 
-        public MainControlPanelViewModel()
+        public ICommand SendMessage
         {
+            get;
+        }
+
+        // Serial port service 
+        private readonly ISerialPortService _serialPortService;
+
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        /// <param name="serialPortService"></param>
+        public MainControlPanelViewModel(ISerialPortService serialPortService)
+        {
+            _serialPortService = serialPortService;
+
             // Commands
             UpdateAvailablePorts = new RelayCommand(OnUpdateAvailablePorts);
+            SendMessage = new RelayCommand(OnSendMessage);
 
             // Default value 
-            selectedPortName = GetFirstAvailablePort();
-            selectedBaudRate = "115200";
+            selectedPortName = _serialPortService.PortName;
+            selectedBaudRate = _serialPortService.BaudRate;
             availableBaudRateFlyout = GetBaudRateMenuFlyout();
+            sendMessageBuffer = "";
 
             // Available ports flyout
             availablePortsFlyout = new MenuFlyout();
             availablePortsFlyout.Placement = Microsoft.UI.Xaml.Controls.Primitives.FlyoutPlacementMode.Bottom;
-        }
-
-        /// <summary>
-        /// Get the first available port name
-        /// </summary>
-        /// <returns></returns>
-        private static string GetFirstAvailablePort()
-        {
-            // Get available ports
-            var availableSerialPorts = SerialPort.GetPortNames();
-
-            // If more than COM1
-            if (availableSerialPorts.Length > 1)
-            {
-                return availableSerialPorts[1];
-            }
-
-            return "COM1";
         }
 
         /// <summary>
@@ -86,6 +88,9 @@ namespace Lucy.ViewModels
                 {
                     // Update selected port 
                     SelectedPortName = newFlyoutItem.Text;
+
+                    // Update service 
+                    _serialPortService.PortName = SelectedPortName;
                 };
                 // Push into flyout
                 AvailablePortsFlyout.Items.Add(newFlyoutItem);
@@ -130,12 +135,30 @@ namespace Lucy.ViewModels
                 {
                     // Update selected baud rate
                     SelectedBaudRate = newFlyoutItem.Text;
+
+                    // Update service
+                    _serialPortService.BaudRate = SelectedBaudRate;
                 };
                 // Push into flyout
                 availableBaudRateFlyout.Items.Add(newFlyoutItem);
             }
 
             return availableBaudRateFlyout;
+        }
+
+        private void OnSendMessage()
+        {
+            // Get message 
+            //Console.WriteLine(SendMessageBuffer.Length);
+            //Console.Write(SendMessageBuffer);
+
+            if (SendMessageBuffer.Length == 0)
+            {
+                return;
+            }
+
+            // Write message 
+            _serialPortService.Write(SendMessageBuffer);
         }
     }
 }

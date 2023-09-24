@@ -63,6 +63,7 @@ public partial class App : Application
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<ISerialPortService, SerialPortService>();
 
             // Core Services
             services.AddSingleton<IFileService, FileService>();
