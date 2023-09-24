@@ -8,12 +8,15 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="64" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Top pannel -->
-        <Grid Grid.Row="0">
+        <Grid 
+            Grid.Row="0"
+            >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -26,9 +29,9 @@
             <Button 
                 Grid.Column="0" 
                 
-                VerticalAlignment="Center"
-                Padding="0"
-                Margin="16, 10, 0, 0"
+                VerticalAlignment="Top"
+                Padding="2"
+                Margin="16, 12, 0, 0"
                 CornerRadius="12"
                 Background="Transparent"
                 BorderThickness="0"
@@ -47,7 +50,7 @@
                 Grid.Column="1"
                 >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="32"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -67,7 +70,7 @@
                         Grid.Column="0"
                         
                         
-                        Margin="21, 0, 0, 0"
+                        Margin="21, 2, 0, 0"
                         Opacity="0.8"
                         VerticalAlignment="Bottom"
                         
@@ -121,21 +124,24 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
 
 
                     <DropDownButton 
                         Grid.Column="0"
-    
+                        
                         Content="COM23"
     
+                        Margin="12, 12, 0, 0"
+                        VerticalAlignment="Top"
+    
                         CornerRadius="8"
-                        Margin="12, 0, 0, 0"
                         Opacity="0.8"
-                        VerticalAlignment="Bottom"
                         Background="Transparent"
-                        BorderThickness="0" 
+                        BorderThickness="0"
     
                         FontSize="13"
                         FontStyle="Italic"
@@ -157,13 +163,14 @@
 
                     <DropDownButton 
                         Grid.Column="1"
-    
+                        
                         Content="115200"
+                        
+                        Margin="6, 12, 0, 0"
+                        VerticalAlignment="Top"
     
                         CornerRadius="8"
-                        Margin="6, 0, 0, 0"
                         Opacity="0.8"
-                        VerticalAlignment="Bottom"
                         Background="Transparent"
                         BorderThickness="0"
     
@@ -185,15 +192,55 @@
 
 
 
-
-
-
-
-
+                    
+                    
+                    <!-- Serial write -->
+                    <TextBox 
+                        Grid.Column="3"
                         
                         
+                        MinWidth="168"
+                        MaxHeight="100"
                         
+                        
+                        Margin="6, 0, 6, 0"
+                        VerticalAlignment="Bottom"
+                        
+                        CornerRadius="8"
+                        Opacity="0.8"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        
+                        AcceptsReturn="True"
+                        FontSize="12"
+                        FontWeight="Normal"
+                        FontFamily="Cascadia Mono"
+                        >
+                    </TextBox>
 
+
+                    <Button
+                        Grid.Column="4"
+                        
+                        CornerRadius="8"
+                        Margin="6, 12, 12, 0"
+                        Opacity="0.8"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        BorderThickness="0"
+    
+                        FontSize="13"
+                        FontStyle="Italic"
+                        FontWeight="Normal"
+                        FontFamily="Cascadia Code"
+                        >
+                        SEND
+                    </Button>
+
+
+
+                    
+                    
 
                 </Grid>
             </Grid>
@@ -203,37 +250,46 @@
 
 
 
-        
 
 
+        <!-- Serial receive pannel -->
         <ScrollViewer 
             Grid.Row = "1"
+            
             IsTabStop="True"
             Margin="0, 12, 0, 12"
             Opacity="0.9"
             >
-
-
             <RichTextBlock
                 x:Name="SerialReceiveTextBlock"
                 Padding="18, 0, 18, 0"
-                
-                
                 
                 FontSize="15"
                 FontWeight="SemiLight"
                 FontFamily="Cascadia Mono"
                 LineHeight="26"
                 ></RichTextBlock>
-            
-
-
         </ScrollViewer>
-        
+
+
         
         
         
 
+        <!-- Bottom pannel -->
+
+        <Grid
+            Grid.Row="2"
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+
+        </Grid>
 
 
     </Grid>
