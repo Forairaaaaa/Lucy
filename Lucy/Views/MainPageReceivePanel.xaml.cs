@@ -53,13 +53,14 @@ namespace Lucy.Views
                 ViewModel.ReceivedMessageBuffer += ViewModel.SerialPortService.Read();
                 ViewModel.UpdateIoStatusLabel();
 
-                // Set flag, notice the next tick to scroll to the bottom (without port reading)
-                // Invoke change view here (right after text changed) will not reach the actual bottom 
-                // Need a render to update scrollviewer's properties I guess 
+                // Scroll to bottom 
+                ScrollViewerReceivedMessage.ChangeView(null, ScrollViewerReceivedMessage.ScrollableHeight, null);
+
+                // Set flag, to notice one more scroll after done reading 
+                // Invoke 'ChangeView' right after every update will not reach the actual bottom 
+                // Need a render to update some scrollviewer's properties I guess 
                 _isNeedToScroll = true;
             }
-
-            // Scroll to bottom 
             else if (_isNeedToScroll)
             {
                 ScrollViewerReceivedMessage.ChangeView(null, ScrollViewerReceivedMessage.ScrollableHeight, null);
