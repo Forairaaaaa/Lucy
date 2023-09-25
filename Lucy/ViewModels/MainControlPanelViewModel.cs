@@ -44,6 +44,9 @@ namespace Lucy.ViewModels
         // Serial port service 
         private readonly ISerialPortService _serialPortService;
 
+        // Expose for code behind usage 
+        public ISerialPortService SerialPortService => _serialPortService;
+
         /// <summary>
         /// Constructor 
         /// </summary>

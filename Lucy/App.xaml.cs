@@ -85,9 +85,6 @@ public partial class App : Application
             // Main page's control panel
             services.AddTransient<MainControlPanelViewModel>();
             services.AddTransient<MainPageControlPanel>();
-
-            // Main page's receive panel
-            services.AddTransient<MainReceivePanelViewModel>();
             services.AddTransient<MainPageReceivePanel>();
 
             // Main page's status panel

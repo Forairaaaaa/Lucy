@@ -23,16 +23,17 @@ namespace Lucy.Views
 {
     public sealed partial class MainPageReceivePanel : UserControl
     {
-        public MainReceivePanelViewModel ViewModel
+        public MainControlPanelViewModel ViewModel
         {
             get;
         }
 
-        DispatcherTimer _updateReceivedMessageTimer;
+        private readonly DispatcherTimer _updateReceivedMessageTimer;
 
         public MainPageReceivePanel()
         {
-            ViewModel = App.GetService<MainReceivePanelViewModel>();
+            // Use control panel's view model too 
+            ViewModel = App.GetService<MainControlPanelViewModel>();
             this.InitializeComponent();
 
             // Setup timer 
