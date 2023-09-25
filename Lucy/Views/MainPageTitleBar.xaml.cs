@@ -21,7 +21,7 @@ namespace Lucy.Views
 {
     public sealed partial class MainPageTitleBar : UserControl
     {
-        public MainTitleBarViewModel ViewModel
+        public MainControlPanelViewModel ViewModel
         {
             get;
         }
@@ -33,7 +33,7 @@ namespace Lucy.Views
 
         public MainPageTitleBar()
         {
-            ViewModel = App.GetService<MainTitleBarViewModel>();
+            ViewModel = App.GetService<MainControlPanelViewModel>();
             this.InitializeComponent();
 
             // Set title bar 
@@ -43,6 +43,8 @@ namespace Lucy.Views
             SwitchOpenPort = ToggleSwitchOpenPort;
         }
 
+        // TODO
+        // this state changing is messy
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             var isOn = ((ToggleSwitch)sender).IsOn;
@@ -50,14 +52,14 @@ namespace Lucy.Views
 
             if (isOn)
             {
-                if (!ViewModel.OnOpenSerialPort())
+                if (!ViewModel.SerialPortService.Open())
                 {
                     ((ToggleSwitch)sender).IsOn = false;
                 }
             }
             else
             {
-                if (!ViewModel.OnCloseSerialPort())
+                if (!ViewModel.SerialPortService.Close())
                 {
                     ((ToggleSwitch)sender).IsOn = true;
                 }

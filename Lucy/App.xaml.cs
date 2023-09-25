@@ -79,12 +79,13 @@ public partial class App : Application
             services.AddTransient<MainPageAvatar>();
 
             // Main page's title bar
-            services.AddTransient<MainTitleBarViewModel>();
             services.AddTransient<MainPageTitleBar>();
 
             // Main page's control panel
             services.AddTransient<MainControlPanelViewModel>();
             services.AddTransient<MainPageControlPanel>();
+
+            // Main page's receive panel
             services.AddTransient<MainPageReceivePanel>();
 
             // Main page's status panel
