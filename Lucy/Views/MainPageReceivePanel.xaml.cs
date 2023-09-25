@@ -49,7 +49,9 @@ namespace Lucy.Views
         {
             if (ViewModel.SerialPortService.Available() > 0)
             {
-                TextBlockReceivedMessage.Text += ViewModel.SerialPortService.Read();
+                // Update received message 
+                ViewModel.ReceivedMessageBuffer += ViewModel.SerialPortService.Read();
+                ViewModel.UpdateIoStatusLabel();
 
                 // Set flag, notice the next tick to scroll to the bottom (without port reading)
                 // Invoke change view here (right after text changed) will not reach the actual bottom 

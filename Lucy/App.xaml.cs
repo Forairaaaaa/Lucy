@@ -83,7 +83,9 @@ public partial class App : Application
             services.AddTransient<MainPageTitleBar>();
 
             // Main page's control panel
-            services.AddTransient<MainControlPanelViewModel>();
+            //services.AddTransient<MainControlPanelViewModel>();
+            // Use singleton here, since we share this view model between titlebar, recevie panel and control panel 
+            services.AddSingleton<MainControlPanelViewModel, MainControlPanelViewModel>();
             services.AddTransient<MainPageControlPanel>();
 
             // Main page's receive panel

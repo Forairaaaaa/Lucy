@@ -32,6 +32,8 @@
                 x:Name="TextBlockReceivedMessage"
                 Padding="18, 0, 18, 0"
                 
+                Text="{x:Bind ViewModel.ReceivedMessageBuffer, Mode=OneWay}"
+                
                 IsTextSelectionEnabled="True"
     
                 FontSize="15"
@@ -79,6 +81,8 @@
 
             <TextBlock
                 Grid.Column="2"
+                
+                Text="{x:Bind ViewModel.IoStatusLabel, Mode=OneWay}"
     
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
@@ -90,7 +94,6 @@
                 FontStyle="Italic"
                 Opacity="0.5"
                 >
-                <Span>IO: 114514 - 2333</Span>
             </TextBlock>
             
             

@@ -31,6 +31,12 @@ namespace Lucy.ViewModels
         [ObservableProperty]
         private string sendMessageBuffer;
 
+        [ObservableProperty]
+        private string receivedMessageBuffer;
+
+        [ObservableProperty]
+        private string ioStatusLabel;
+
         public ICommand UpdateAvailablePorts
         {
             get;
@@ -40,6 +46,8 @@ namespace Lucy.ViewModels
         {
             get;
         }
+
+        private int _sendedMessageNum;
 
         // Serial port service 
         private readonly ISerialPortService _serialPortService;
@@ -64,6 +72,9 @@ namespace Lucy.ViewModels
             selectedBaudRate = _serialPortService.BaudRate;
             availableBaudRateFlyout = GetBaudRateMenuFlyout();
             sendMessageBuffer = "";
+            receivedMessageBuffer = "";
+            _sendedMessageNum = 0;
+            ioStatusLabel = "";
 
             // Available ports flyout
             availablePortsFlyout = new MenuFlyout();
@@ -183,6 +194,7 @@ namespace Lucy.ViewModels
 
             return availableBaudRateFlyout;
         }
+        
 
         private void OnSendMessage()
         {
@@ -197,6 +209,17 @@ namespace Lucy.ViewModels
 
             // Write message 
             _serialPortService.Write(SendMessageBuffer);
+
+            // Update sended message num
+            _sendedMessageNum += SendMessageBuffer.Length;
+            UpdateIoStatusLabel();
+        }
+
+
+        public void UpdateIoStatusLabel()
+        {
+            IoStatusLabel = ReceivedMessageBuffer.Length.ToString() + " - " + _sendedMessageNum.ToString();
+            //Console.WriteLine( IoStatusLabel );
         }
     }
 }
