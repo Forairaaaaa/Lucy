@@ -10,7 +10,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="24" />
         </Grid.RowDefinitions>
 
         <!-- Top pannel -->
@@ -67,13 +66,6 @@
             >
         </views:MainPageReceivePanel>
         
-      
-        <!-- Status panel -->
-        <views:MainPageStatusPanel
-            Grid.Row="2"
-            >
-        </views:MainPageStatusPanel>
-        
-      
+
     </Grid>
 </Page>

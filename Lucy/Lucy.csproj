@@ -28,7 +28,6 @@
     <None Remove="Views\MainPageAvatar.xaml" />
     <None Remove="Views\MainPageControlPanel.xaml" />
     <None Remove="Views\MainPageReceivePanel.xaml" />
-    <None Remove="Views\MainPageStatusPanel.xaml" />
     <None Remove="Views\MainPageTitleBar.xaml" />
   </ItemGroup>
 
@@ -67,9 +66,6 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <Page Update="Views\MainPageStatusPanel.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Update="Views\MainPageReceivePanel.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

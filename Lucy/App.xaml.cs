@@ -74,6 +74,7 @@ public partial class App : Application
             services.AddTransient<MainViewModel>();
             services.AddTransient<MainPage>();
 
+
             // Main page's avatar
             services.AddTransient<MainAvatarViewModel>();
             services.AddTransient<MainPageAvatar>();
@@ -88,9 +89,6 @@ public partial class App : Application
             // Main page's receive panel
             services.AddTransient<MainPageReceivePanel>();
 
-            // Main page's status panel
-            services.AddTransient<MainStatusPanelViewModel>();
-            services.AddTransient<MainPageStatusPanel>();
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
