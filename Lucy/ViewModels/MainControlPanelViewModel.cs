@@ -47,6 +47,11 @@ namespace Lucy.ViewModels
             get;
         }
 
+        public ICommand ClearAll
+        {
+            get;
+        }
+
         private int _sendedMessageNum;
 
         // Serial port service 
@@ -66,6 +71,7 @@ namespace Lucy.ViewModels
             // Commands
             UpdateAvailablePorts = new RelayCommand(OnUpdateAvailablePorts);
             SendMessage = new RelayCommand(OnSendMessage);
+            ClearAll = new RelayCommand(OnClearAll);
 
             // Default value 
             selectedPortName = _serialPortService.PortName;
@@ -215,11 +221,22 @@ namespace Lucy.ViewModels
             UpdateIoStatusLabel();
         }
 
-
         public void UpdateIoStatusLabel()
         {
             IoStatusLabel = ReceivedMessageBuffer.Length.ToString() + " - " + _sendedMessageNum.ToString();
             //Console.WriteLine( IoStatusLabel );
+        }
+
+        private void OnClearAll()
+        {
+            // Clear sended messages
+            _sendedMessageNum = 0;
+
+            // Clear received messages 
+            ReceivedMessageBuffer = "";
+
+            // Update status label
+            UpdateIoStatusLabel();
         }
     }
 }
