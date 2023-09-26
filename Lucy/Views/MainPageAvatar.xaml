@@ -11,6 +11,7 @@
     <!-- Avatar -->
     <!--Command="{x:Bind ViewModel.GoPageSettingsCommand}"-->
     <!--ProfilePicture="https://i1.hdslb.com/bfs/face/548fa2f64195cd9fe4935244e13673bc202d051c.jpg"-->
+    <!--ProfilePicture="https://media.tenor.com/_RzPjwWKk6YAAAAd/comida.gif"-->
     <Button 
         Padding="2"
         CornerRadius="12"
@@ -21,7 +22,7 @@
         >
         <PersonPicture
             Height="54"
-            ProfilePicture="https://media.tenor.com/_RzPjwWKk6YAAAAd/comida.gif"
+            ProfilePicture="{x:Bind ViewModel.ThemeSelectorService.AvatarUrl, Mode=OneWay}"
         >
         </PersonPicture>
     </Button>

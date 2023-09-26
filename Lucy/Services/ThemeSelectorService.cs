@@ -2,7 +2,6 @@
 using Lucy.Helpers;
 
 using Microsoft.UI.Xaml;
-
 namespace Lucy.Services;
 
 public class ThemeSelectorService : IThemeSelectorService
@@ -21,6 +20,10 @@ public class ThemeSelectorService : IThemeSelectorService
     public async Task InitializeAsync()
     {
         Theme = await LoadThemeFromSettingsAsync();
+
+        // Load avatar setting
+        AvatarUrl = await LoadAvatarUrlFromSettingsAsync();
+
         await Task.CompletedTask;
     }
 
@@ -59,5 +62,30 @@ public class ThemeSelectorService : IThemeSelectorService
     private async Task SaveThemeInSettingsAsync(ElementTheme theme)
     {
         await _localSettingsService.SaveSettingAsync(SettingsKey, theme.ToString());
+    }
+
+    public string AvatarUrl
+    {
+        get;
+        set;
+    } = "";
+
+    private const string SettingsKeyAvatarUrl = "AppAvatarUrl";
+
+    public async Task SetAvatarUrlAsync(string avatarUrl)
+    {
+        AvatarUrl = avatarUrl;
+        await _localSettingsService.SaveSettingAsync(SettingsKeyAvatarUrl, avatarUrl);
+    }
+
+    private async Task<string> LoadAvatarUrlFromSettingsAsync()
+    {
+        var url = await _localSettingsService.ReadSettingAsync<string>(SettingsKeyAvatarUrl);
+
+        Console.WriteLine($"load url get: {url}");
+
+        url ??= "https://media.tenor.com/_RzPjwWKk6YAAAAd/comida.gif";
+
+        return url;
     }
 }

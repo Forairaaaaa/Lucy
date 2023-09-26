@@ -9,9 +9,16 @@ public interface IThemeSelectorService
         get;
     }
 
+    string AvatarUrl
+    {
+        get; 
+    }
+
     Task InitializeAsync();
 
     Task SetThemeAsync(ElementTheme theme);
 
     Task SetRequestedThemeAsync();
+
+    Task SetAvatarUrlAsync(string avatarUrl);
 }

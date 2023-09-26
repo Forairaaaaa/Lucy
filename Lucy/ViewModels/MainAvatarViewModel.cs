@@ -26,12 +26,19 @@ namespace Lucy.ViewModels
             get;
         }
 
-        public MainAvatarViewModel(INavigationService navigationService)
+        public IThemeSelectorService ThemeSelectorService
+        {
+            get; 
+        }
+
+        public MainAvatarViewModel(INavigationService navigationService, IThemeSelectorService themeSelectorService)
         {
             NavigationService = navigationService;
             NavigationService.Navigated += OnNavigated;
 
             GoPageSettingsCommand = new RelayCommand(OnGoPageSettings);
+
+            ThemeSelectorService = themeSelectorService;
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
