@@ -37,6 +37,12 @@ namespace Lucy.ViewModels
         [ObservableProperty]
         private string ioStatusLabel;
 
+        [ObservableProperty]
+        private bool isPortOpened;
+
+        [ObservableProperty]
+        private string togglePortButtonContent;
+
         public ICommand UpdateAvailablePorts
         {
             get;
@@ -48,6 +54,11 @@ namespace Lucy.ViewModels
         }
 
         public ICommand ClearAll
+        {
+            get;
+        }
+
+        public ICommand TogglePort
         {
             get;
         }
@@ -72,6 +83,7 @@ namespace Lucy.ViewModels
             UpdateAvailablePorts = new RelayCommand(OnUpdateAvailablePorts);
             SendMessage = new RelayCommand(OnSendMessage);
             ClearAll = new RelayCommand(OnClearAll);
+            TogglePort = new RelayCommand(OnTogglePort);
 
             // Default value 
             selectedPortName = _serialPortService.PortName;
@@ -81,6 +93,8 @@ namespace Lucy.ViewModels
             receivedMessageBuffer = "";
             _sendedMessageNum = 0;
             ioStatusLabel = "";
+            isPortOpened = _serialPortService.IsOpened;
+            togglePortButtonContent = "_(:з」∠)_";
 
             // Available ports flyout
             availablePortsFlyout = new MenuFlyout();
@@ -119,13 +133,10 @@ namespace Lucy.ViewModels
             // If already opened 
             if (_serialPortService.IsOpened)
             {
-                // Don't know why it's false
-                //var shit2 = App.GetService<MainPageTitleBar>().SwitchOpenPort.IsOn;
-                //Console.WriteLine(shit2);
-
                 // Try close 
                 if (!_serialPortService.Close())
                 {
+                    UpdateTogglePortButton();
                     return;
                 }
 
@@ -135,12 +146,10 @@ namespace Lucy.ViewModels
                 // Update service 
                 _serialPortService.PortName = SelectedPortName;
 
-                // Reset switch (kinf of failed to do that, don't know why it's false already, set to false again doesn't change the ui
+                // Open again
+                _serialPortService.Open();
 
-                // But if I set it true here
-                // This will trigger the toggle event and open the port
-                // It kind of achieve the hot port changing... 
-                App.GetService<MainPageTitleBar>().SwitchOpenPort.IsOn = true;
+                UpdateTogglePortButton();
             }
             else
             {
@@ -237,6 +246,28 @@ namespace Lucy.ViewModels
 
             // Update status label
             UpdateIoStatusLabel();
+        }
+
+        private void OnTogglePort()
+        {
+            if (_serialPortService.IsOpened)
+            {
+                // Try close
+                _serialPortService.Close();
+            }
+            else
+            {
+                // Try open 
+                _serialPortService.Open();
+            }
+
+            UpdateTogglePortButton();
+        }
+
+        private void UpdateTogglePortButton()
+        {
+            IsPortOpened = _serialPortService.IsOpened;
+            TogglePortButtonContent = _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ)" : "_(:з」∠)_";
         }
     }
 }

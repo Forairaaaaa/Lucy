@@ -13,16 +13,43 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+        
+        
+        <!-- Open, Close button -->
+        <ToggleButton
+            Grid.Column="0"
+            
+            Content="{x:Bind ViewModel.TogglePortButtonContent, Mode=OneWay}"
+            IsChecked="{x:Bind ViewModel.IsPortOpened, Mode=OneWay}"
+            Command="{x:Bind ViewModel.TogglePort}"
+    
+            Margin="12, 12, 0, 0"
+            VerticalAlignment="Top"
+    
+            CornerRadius="8"
+            Opacity="0.8"
+            Background="Transparent"
+            BorderThickness="0"
+            Width="90"
+    
+            FontSize="12"
+            FontStyle="Normal"
+            FontWeight="Normal"
+            FontFamily="Cascadia Code"
+            
+            ToolTipService.ToolTip="Open Port"
+            >
+        </ToggleButton>
 
 
         <!-- Select port name button -->
-        <DropDownButton 
-            x:Name="DropDownButtonSelectPort"
-            Grid.Column="0"
+        <DropDownButton
+            Grid.Column="1"
         
             Content="{x:Bind ViewModel.SelectedPortName, Mode=OneWay}"
             Command="{x:Bind ViewModel.UpdateAvailablePorts}"
@@ -48,7 +75,7 @@
 
         <!-- Select baud rate button -->
         <DropDownButton 
-            Grid.Column="1"
+            Grid.Column="2"
         
             Content="{x:Bind ViewModel.SelectedBaudRate, Mode=OneWay}"
             Flyout="{x:Bind ViewModel.AvailableBaudRateFlyout}"
@@ -73,12 +100,13 @@
 
         <!-- Write message box -->
         <TextBox 
-            Grid.Column="3"
+            Grid.Column="4"
             
             Text="{x:Bind ViewModel.SendMessageBuffer, Mode=TwoWay}"
         
             MinWidth="168"
             MaxHeight="100"
+            MaxWidth="1000"
         
             Margin="6, 0, 6, 0"
             VerticalAlignment="Bottom"
@@ -97,7 +125,7 @@
 
         <!-- Send button -->
         <Button
-            Grid.Column="4"
+            Grid.Column="5"
             
             Command="{x:Bind ViewModel.SendMessage}"
         

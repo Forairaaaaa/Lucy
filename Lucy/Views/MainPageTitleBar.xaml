@@ -10,22 +10,24 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
 
-        <!-- Serial port open switch -->
-        <ToggleSwitch
+        
+        
+        
+        <!--
+            <ToggleSwitch
             x:Name="ToggleSwitchOpenPort"
             Grid.Column="0"
-            
+    
             Toggled="ToggleSwitch_Toggled"
-            
+    
             Margin="21, 2, 0, 0"
             Opacity="0.8"
             VerticalAlignment="Bottom"
-        
+
             OffContent="_(:з」∠)_"
             OnContent=" (ᗜ ‸ ᗜ)"
 
@@ -33,6 +35,27 @@
             FontFamily="Cascadia Mono"
             >
         </ToggleSwitch>
+        -->
+
+        
+        
+        <!--
+        <TextBlock
+            Grid.Column="0"
+    
+            Text="_(:з」∠)_"
+    
+            Margin="21, 2, 0, 0"
+            Opacity="0.8"
+            VerticalAlignment="Bottom"
+    
+            FontSize="10"
+            FontFamily="Cascadia Mono"
+            >
+    
+        </TextBlock>
+        -->
+        
 
 
         <!-- Title bar -->
@@ -41,7 +64,7 @@
             x:Name="TitleBar"
             >
             <TextBlock
-                Margin="0, 0, 250, 0" 
+                Margin="0, 0, 70, 0" 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 
