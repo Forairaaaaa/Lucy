@@ -38,10 +38,10 @@ namespace Lucy.ViewModels
         private string ioStatusLabel;
 
         [ObservableProperty]
-        private bool isPortOpened;
+        private string openPortButtonContent;
 
         [ObservableProperty]
-        private string togglePortButtonContent;
+        private string openPortButtonToolTip;
 
         public ICommand UpdateAvailablePorts
         {
@@ -58,7 +58,7 @@ namespace Lucy.ViewModels
             get;
         }
 
-        public ICommand TogglePort
+        public ICommand OpenPort
         {
             get;
         }
@@ -83,7 +83,7 @@ namespace Lucy.ViewModels
             UpdateAvailablePorts = new RelayCommand(OnUpdateAvailablePorts);
             SendMessage = new RelayCommand(OnSendMessage);
             ClearAll = new RelayCommand(OnClearAll);
-            TogglePort = new RelayCommand(OnTogglePort);
+            OpenPort = new RelayCommand(OnOpenPort);
 
             // Default value 
             selectedPortName = _serialPortService.PortName;
@@ -93,8 +93,8 @@ namespace Lucy.ViewModels
             receivedMessageBuffer = "";
             _sendedMessageNum = 0;
             ioStatusLabel = "";
-            isPortOpened = _serialPortService.IsOpened;
-            togglePortButtonContent = "_(:з」∠)_";
+            openPortButtonContent = "_(:з」∠)_";
+            openPortButtonToolTip = "Closed";
 
             // Available ports flyout
             availablePortsFlyout = new MenuFlyout();
@@ -136,7 +136,7 @@ namespace Lucy.ViewModels
                 // Try close 
                 if (!_serialPortService.Close())
                 {
-                    UpdateTogglePortButton();
+                    UpdateOpenPortButton();
                     return;
                 }
 
@@ -149,7 +149,7 @@ namespace Lucy.ViewModels
                 // Open again
                 _serialPortService.Open();
 
-                UpdateTogglePortButton();
+                UpdateOpenPortButton();
             }
             else
             {
@@ -248,7 +248,7 @@ namespace Lucy.ViewModels
             UpdateIoStatusLabel();
         }
 
-        private void OnTogglePort()
+        private void OnOpenPort()
         {
             if (_serialPortService.IsOpened)
             {
@@ -261,13 +261,13 @@ namespace Lucy.ViewModels
                 _serialPortService.Open();
             }
 
-            UpdateTogglePortButton();
+            UpdateOpenPortButton();
         }
 
-        private void UpdateTogglePortButton()
+        private void UpdateOpenPortButton()
         {
-            IsPortOpened = _serialPortService.IsOpened;
-            TogglePortButtonContent = _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ)" : "_(:з」∠)_";
+            OpenPortButtonContent = _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ)" : "_(:з」∠)_";
+            OpenPortButtonToolTip = _serialPortService.IsOpened ? "Opened" : "Closed";
         }
     }
 }

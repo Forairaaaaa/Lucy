@@ -76,11 +76,6 @@ public class SerialPortService : ISerialPortService
         {
             // Try open port 
             _serialPort.Open();
-
-            //// Start reading thread 
-            //_isReading = true;
-            //_readingThread = new Thread(ReadingSerial);
-            //_readingThread.Start();
         } 
         catch (Exception ex)
         {
@@ -104,10 +99,6 @@ public class SerialPortService : ISerialPortService
  
         try
         {
-            //// Stop reading thread and wait 
-            //_isReading = false;
-            //_readingThread?.Join();
-
             // Try close 
             _serialPort.Close();
         }
@@ -151,29 +142,6 @@ public class SerialPortService : ISerialPortService
 
         return true;
     }
-
-    //private void ReadingSerial()
-    //{
-    //    while (_isReading)
-    //    {
-    //        try
-    //        {
-    //            if (_serialPort.BytesToRead > 0)
-    //            {
-    //                var message = _serialPort.ReadExisting();
-    //                //Console.WriteLine(message);
-
-    //                // Fire event
-    //                MessageReceived?.Invoke(this, message);
-    //            }
-    //        }
-    //        catch(Exception ex)
-    //        {
-    //            Console.WriteLine(ex.Message);
-    //            break;
-    //        }
-    //    }
-    //}
 
     public int Available()
     {
