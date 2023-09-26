@@ -41,10 +41,18 @@ public partial class SettingsViewModel : ObservableRecipient
         get;
     }
 
+    [ObservableProperty]
+    private string avatarUrl;
+    public ICommand SetAvatarUrl
+    {
+        get;
+    }
+
     public SettingsViewModel(IThemeSelectorService themeSelectorService, INavigationService navigationService)
     {
         _themeSelectorService = themeSelectorService;
         _elementTheme = _themeSelectorService.Theme;
+        avatarUrl = _themeSelectorService.AvatarUrl;
         _versionDescription = GetVersionDescription();
 
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
@@ -62,6 +70,8 @@ public partial class SettingsViewModel : ObservableRecipient
         NavigationService.Navigated += OnNavigated;
 
         GoPageMainCommand = new RelayCommand(OnGoPageMain);
+
+        SetAvatarUrl = new RelayCommand(OnSetAvatarUrl);
     }
 
     private static string GetVersionDescription()
@@ -79,10 +89,19 @@ public partial class SettingsViewModel : ObservableRecipient
             version = Assembly.GetExecutingAssembly().GetName().Version!;
         }
 
-        return $"🌕{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
 
     private void OnGoPageMain() => NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
+
+    private async void OnSetAvatarUrl()
+    {
+        //Console.WriteLine($"set avatar url to {AvatarUrl}");
+
+        await _themeSelectorService.SetAvatarUrlAsync(AvatarUrl);
+
+        AvatarUrl = _themeSelectorService.AvatarUrl;
+    }
 }

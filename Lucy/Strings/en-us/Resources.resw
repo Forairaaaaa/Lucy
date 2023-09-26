@@ -158,4 +158,7 @@
     <value>Settings</value>
     <comment>Page title for SettingsPage</comment>
   </data>
+  <data name="Settings_Avatar.Text" xml:space="preserve">
+    <value>Avatar url</value>
+  </data>
 </root>

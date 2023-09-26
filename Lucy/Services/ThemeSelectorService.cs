@@ -82,7 +82,7 @@ public class ThemeSelectorService : IThemeSelectorService
     {
         var url = await _localSettingsService.ReadSettingAsync<string>(SettingsKeyAvatarUrl);
 
-        Console.WriteLine($"load url get: {url}");
+        //Console.WriteLine($"load url get: {url}");
 
         url ??= "https://media.tenor.com/_RzPjwWKk6YAAAAd/comida.gif";
 

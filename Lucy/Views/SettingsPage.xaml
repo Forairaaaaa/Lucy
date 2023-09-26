@@ -35,10 +35,15 @@
             x:Uid="Settings_Title"
             Style="{StaticResource PageTitleStyle}" />
         <StackPanel
-            Grid.Row="1" 
-            x:Name="ContentArea">
+            Grid.Row="1"
+            x:Name="ContentArea"
+            >
+            
+            
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
-            <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+            <StackPanel 
+                Margin="{StaticResource SmallTopBottomMargin}"
+                >
                 <TextBlock x:Uid="Settings_Theme" />
 
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
@@ -75,9 +80,48 @@
                 </StackPanel>
             </StackPanel>
 
-            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
 
-            <StackPanel Margin="{StaticResource XSmallTopMargin}">
+
+            <TextBlock x:Uid="Settings_Avatar" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <StackPanel 
+                Margin="{StaticResource XSmallTopMargin}"
+                >
+                <Grid
+                    >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="0"
+                        
+                        Text="{x:Bind ViewModel.AvatarUrl, Mode=TwoWay}"
+                        
+                        BorderThickness="0"
+                        Background="Transparent"
+                        CornerRadius="8"
+                        >
+                    </TextBox>
+                    <Button
+                        Grid.Column="1"
+                        
+                        Command="{x:Bind ViewModel.SetAvatarUrl}"
+                        
+                        Background="Transparent"
+                        BorderThickness="0"
+                        CornerRadius="8"
+                        Margin="12, 0, 0, 0"
+                        FontStyle="Italic"
+                        >SAVE</Button>
+                </Grid>
+            </StackPanel>
+
+
+
+            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <StackPanel 
+                Margin="{StaticResource XSmallTopMargin}"
+                >
                 <TextBlock Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}" Style="{ThemeResource BodyTextBlockStyle}" />
 
                 <TextBlock
