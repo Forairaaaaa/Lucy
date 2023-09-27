@@ -11,6 +11,8 @@ using Lucy.Contracts.Services;
 using Lucy.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Windows.UI;
 
 namespace Lucy.ViewModels
 {
@@ -95,8 +97,8 @@ namespace Lucy.ViewModels
             receivedMessageBuffer = string.Empty;
             _sendedMessageNum = 0;
             ioStatusLabel = string.Empty;
-            openPortButtonContent = "_(:з」∠)_";
-            openPortButtonToolTip = "Closed";
+            openPortButtonContent = GetOpenPortButtonContent();
+            openPortButtonToolTip = GetOpenPortButtonToolTip();
             ErrorBuffer = string.Empty;
 
             // Available ports flyout
@@ -278,10 +280,20 @@ namespace Lucy.ViewModels
             UpdateOpenPortButton();
         }
 
+        private string GetOpenPortButtonContent()
+        {
+            return _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ) 🎉" : "🕹️ _(:з」∠)_";
+        }
+
+        private string GetOpenPortButtonToolTip()
+        {
+            return _serialPortService.IsOpened ? "Opened" : "Closed";
+        }
+
         private void UpdateOpenPortButton()
         {
-            OpenPortButtonContent = _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ)🎉" : "_(:з」∠)_";
-            OpenPortButtonToolTip = _serialPortService.IsOpened ? "Opened" : "Closed";
+            OpenPortButtonContent = GetOpenPortButtonContent();
+            OpenPortButtonToolTip = GetOpenPortButtonToolTip();
         }
 
         private void PopError()

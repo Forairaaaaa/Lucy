@@ -31,9 +31,10 @@
             VerticalAlignment="Top"
     
             CornerRadius="8"
-            Opacity="0.8"
             Background="Transparent"
-            Width="90"
+            Opacity="0.8"
+            
+            Width="123"
     
             FontSize="12"
             FontStyle="Normal"
@@ -53,7 +54,7 @@
             Command="{x:Bind ViewModel.UpdateAvailablePorts}"
             Flyout="{x:Bind ViewModel.AvailablePortsFlyout}"
     
-            Margin="12, 12, 0, 0"
+            Margin="6, 12, 0, 0"
             VerticalAlignment="Top"
     
             CornerRadius="8"
