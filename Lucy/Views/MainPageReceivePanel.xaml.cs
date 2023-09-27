@@ -47,6 +47,13 @@ namespace Lucy.Views
 
         private void UpdateReceivedMessage(object? sender, object e)
         {
+            if (_isNeedToScroll)
+            {
+                ScrollViewerReceivedMessage.ChangeView(null, ScrollViewerReceivedMessage.ScrollableHeight, null);
+                // Reset flag 
+                _isNeedToScroll = false;
+            }
+
             if (ViewModel.SerialPortService.Available() > 0)
             {
                 // Update received message 
@@ -61,11 +68,16 @@ namespace Lucy.Views
                 // Need a render to update some scrollviewer's properties I guess 
                 _isNeedToScroll = true;
             }
-            else if (_isNeedToScroll)
+
+            if (ViewModel.ErrorBuffer.Length != 0)
             {
-                ScrollViewerReceivedMessage.ChangeView(null, ScrollViewerReceivedMessage.ScrollableHeight, null);
-                // Reset flag 
-                _isNeedToScroll = false;
+                // Pop error 
+                ViewModel.ReceivedMessageBuffer += ViewModel.ErrorBuffer;
+
+                // Empty buffer 
+                ViewModel.ErrorBuffer = string.Empty;
+
+                _isNeedToScroll = true;
             }
         }
     }

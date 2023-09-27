@@ -43,6 +43,8 @@ namespace Lucy.ViewModels
         [ObservableProperty]
         private string openPortButtonToolTip;
 
+        public string ErrorBuffer;
+
         public ICommand UpdateAvailablePorts
         {
             get;
@@ -89,12 +91,13 @@ namespace Lucy.ViewModels
             selectedPortName = _serialPortService.PortName;
             selectedBaudRate = _serialPortService.BaudRate;
             availableBaudRateFlyout = GetBaudRateMenuFlyout();
-            sendMessageBuffer = "";
-            receivedMessageBuffer = "";
+            sendMessageBuffer = string.Empty;
+            receivedMessageBuffer = string.Empty;
             _sendedMessageNum = 0;
-            ioStatusLabel = "";
+            ioStatusLabel = string.Empty;
             openPortButtonContent = "_(:з」∠)_";
             openPortButtonToolTip = "Closed";
+            ErrorBuffer = string.Empty;
 
             // Available ports flyout
             availablePortsFlyout = new MenuFlyout();
@@ -222,8 +225,12 @@ namespace Lucy.ViewModels
                 return;
             }
 
-            // Write message 
-            _serialPortService.Write(SendMessageBuffer);
+            // Try write message 
+            if (!_serialPortService.Write(SendMessageBuffer))
+            {
+                PopError();
+                return;
+            }
 
             // Update sended message num
             _sendedMessageNum += SendMessageBuffer.Length;
@@ -253,12 +260,19 @@ namespace Lucy.ViewModels
             if (_serialPortService.IsOpened)
             {
                 // Try close
-                _serialPortService.Close();
+                if (!_serialPortService.Close())
+                {
+                    PopError();
+                }
             }
             else
             {
                 // Try open 
                 _serialPortService.Open();
+                if (!_serialPortService.Open())
+                {
+                    PopError();
+                }
             }
 
             UpdateOpenPortButton();
@@ -268,6 +282,12 @@ namespace Lucy.ViewModels
         {
             OpenPortButtonContent = _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ)" : "_(:з」∠)_";
             OpenPortButtonToolTip = _serialPortService.IsOpened ? "Opened" : "Closed";
+        }
+
+        private void PopError()
+        {
+            // Recevie panel's timer will handle this 
+            ErrorBuffer += "🫠 " + _serialPortService.LastError + "\r\n";
         }
     }
 }

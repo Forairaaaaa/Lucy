@@ -22,6 +22,11 @@ public interface ISerialPortService
         get; set; 
     }
 
+    string LastError
+    {
+        get;
+    }
+
     bool Open();
 
     bool Close();

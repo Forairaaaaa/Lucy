@@ -33,6 +33,12 @@ public class SerialPortService : ISerialPortService
         }
     }
 
+    public string LastError
+    {
+        get;
+        set;
+    }
+
     // Serial port 
     private readonly SerialPort _serialPort;
 
@@ -59,6 +65,7 @@ public class SerialPortService : ISerialPortService
         // Default value 
         PortName = "COM1";
         BaudRate = "115200";
+        LastError = string.Empty;
     }
 
     /// <summary>
@@ -80,6 +87,7 @@ public class SerialPortService : ISerialPortService
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
+            LastError = ex.Message;
             return false;
         }
 
@@ -105,6 +113,7 @@ public class SerialPortService : ISerialPortService
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
+            LastError = ex.Message;
             return false;
         }
 
@@ -137,6 +146,7 @@ public class SerialPortService : ISerialPortService
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
+            LastError = ex.Message;
             return false;
         }
 
@@ -167,6 +177,7 @@ public class SerialPortService : ISerialPortService
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                LastError = ex.Message;
             }
         }
 
