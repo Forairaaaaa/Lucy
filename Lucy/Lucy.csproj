@@ -24,11 +24,20 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl></RepositoryUrl>
 
-	  <WindowsPackageType>None</WindowsPackageType>
-	  <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	  
+	  
+	  <!--
+	    <WindowsPackageType>None</WindowsPackageType>
+	    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	  -->
 	  
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\BadgeLogo.scale-100.png" />
+    <None Remove="Assets\BadgeLogo.scale-125.png" />
+    <None Remove="Assets\BadgeLogo.scale-150.png" />
+    <None Remove="Assets\BadgeLogo.scale-200.png" />
+    <None Remove="Assets\BadgeLogo.scale-400.png" />
     <None Remove="Views\MainPageAvatar.xaml" />
     <None Remove="Views\MainPageControlPanel.xaml" />
     <None Remove="Views\MainPageReceivePanel.xaml" />
