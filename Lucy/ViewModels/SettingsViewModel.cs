@@ -48,6 +48,11 @@ public partial class SettingsViewModel : ObservableRecipient
         get;
     }
 
+    public ICommand ResetAvatarUrl
+    {
+        get;
+    }
+
     public SettingsViewModel(IThemeSelectorService themeSelectorService, INavigationService navigationService)
     {
         _themeSelectorService = themeSelectorService;
@@ -72,6 +77,7 @@ public partial class SettingsViewModel : ObservableRecipient
         GoPageMainCommand = new RelayCommand(OnGoPageMain);
 
         SetAvatarUrl = new RelayCommand(OnSetAvatarUrl);
+        ResetAvatarUrl = new RelayCommand(OnResetAvatarUrl);
     }
 
     private static string GetVersionDescription()
@@ -101,6 +107,13 @@ public partial class SettingsViewModel : ObservableRecipient
         //Console.WriteLine($"set avatar url to {AvatarUrl}");
 
         await _themeSelectorService.SetAvatarUrlAsync(AvatarUrl);
+
+        AvatarUrl = _themeSelectorService.AvatarUrl;
+    }
+
+    private async void OnResetAvatarUrl()
+    {
+        await _themeSelectorService.SetAvatarUrlAsync("AvatarDefaultUrl".GetLocalized());
 
         AvatarUrl = _themeSelectorService.AvatarUrl;
     }

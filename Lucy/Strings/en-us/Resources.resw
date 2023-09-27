@@ -159,7 +159,7 @@
     <comment>Page title for SettingsPage</comment>
   </data>
   <data name="Settings_Avatar.Text" xml:space="preserve">
-    <value>Avatar url</value>
+    <value>Avatar URL</value>
   </data>
   <data name="Error_ConnectionLost" xml:space="preserve">
     <value>Connection Lost</value>
@@ -190,5 +190,11 @@
   </data>
   <data name="AvatarDefaultUrl" xml:space="preserve">
     <value>https://pic.imgdb.cn/item/6514280dc458853aef516617.gif</value>
+  </data>
+  <data name="ButtonSaveAvatarUrl.Content" xml:space="preserve">
+    <value>SAVE 😊</value>
+  </data>
+  <data name="ButtonSetDefaultAvatarUrl.Content" xml:space="preserve">
+    <value>RESET</value>
   </data>
 </root>
