@@ -23,6 +23,10 @@
     <PackageProjectUrl>https://github.com/Forairaaaaa/Lucy</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl></RepositoryUrl>
+
+	  <WindowsPackageType>None</WindowsPackageType>
+	  <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	  
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\MainPageAvatar.xaml" />
