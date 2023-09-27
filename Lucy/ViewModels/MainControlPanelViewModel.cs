@@ -280,7 +280,7 @@ namespace Lucy.ViewModels
 
         private void UpdateOpenPortButton()
         {
-            OpenPortButtonContent = _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ)" : "_(:з」∠)_";
+            OpenPortButtonContent = _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ)🎉" : "_(:з」∠)_";
             OpenPortButtonToolTip = _serialPortService.IsOpened ? "Opened" : "Closed";
         }
 
