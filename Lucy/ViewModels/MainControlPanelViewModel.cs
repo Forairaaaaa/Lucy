@@ -8,6 +8,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Lucy.Contracts.Services;
+using Lucy.Helpers;
 using Lucy.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -286,12 +287,12 @@ namespace Lucy.ViewModels
 
         private string GetOpenPortButtonContent()
         {
-            return _serialPortService.IsOpened ? "(ᗜ ‸ ᗜ) 🎉" : "🕹️ _(:з」∠)_";
+            return _serialPortService.IsOpened ? "OpenPortButton_IsOpened".GetLocalized() : "OpenPortButton_IsClosed".GetLocalized();
         }
 
         private string GetOpenPortButtonToolTip()
         {
-            return _serialPortService.IsOpened ? "Opened" : "Closed";
+            return _serialPortService.IsOpened ? "ToolTip_PortIsOpened".GetLocalized() : "ToolTip_PortIsClosed".GetLocalized();
         }
 
         private void UpdateOpenPortButton()
@@ -306,11 +307,11 @@ namespace Lucy.ViewModels
             // Recevie panel's timer tick will handle this 
             if (custom == null)
             {
-                ErrorBuffer += "🫠 " + _serialPortService.LastError + "\r\n";
+                ErrorBuffer += "Error_Head".GetLocalized() + _serialPortService.LastError + "\r\n";
             }
             else
             {
-                ErrorBuffer += "🫠 " + custom + "\r\n";
+                ErrorBuffer += "Error_Head".GetLocalized() + custom + "\r\n";
             }
         }
 
@@ -322,7 +323,7 @@ namespace Lucy.ViewModels
                 UpdateOpenPortButton();
 
                 // Pop error 
-                PopError("lost connection");
+                PopError("Error_ConnectionLost".GetLocalized());
             }
         }
     }

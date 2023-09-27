@@ -161,4 +161,22 @@
   <data name="Settings_Avatar.Text" xml:space="preserve">
     <value>Avatar url</value>
   </data>
+  <data name="Error_ConnectionLost" xml:space="preserve">
+    <value>Connection Lost</value>
+  </data>
+  <data name="Error_Head" xml:space="preserve">
+    <value>🫠 </value>
+  </data>
+  <data name="OpenPortButton_IsClosed" xml:space="preserve">
+    <value>🕹️ _(:з」∠)_</value>
+  </data>
+  <data name="OpenPortButton_IsOpened" xml:space="preserve">
+    <value>(ᗜ ‸ ᗜ) 🎉</value>
+  </data>
+  <data name="ToolTip_PortIsClosed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="ToolTip_PortIsOpened" xml:space="preserve">
+    <value>Opened</value>
+  </data>
 </root>
