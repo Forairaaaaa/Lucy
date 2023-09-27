@@ -81,7 +81,7 @@
             </StackPanel>
 
 
-
+            <!-- Avatar setting -->
             <TextBlock x:Uid="Settings_Avatar" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel 
                 Margin="{StaticResource XSmallTopMargin}"
@@ -100,6 +100,8 @@
                         BorderThickness="0"
                         Background="Transparent"
                         CornerRadius="8"
+                        TextWrapping="Wrap"
+                        MaxWidth="800"
                         >
                     </TextBox>
                     <Button

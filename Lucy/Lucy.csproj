@@ -23,6 +23,16 @@
     <PackageProjectUrl>https://github.com/Forairaaaaa/Lucy</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl></RepositoryUrl>
+    <PackageCertificateThumbprint>F3650CD884378490AF029E1CC36754A2FEF91199</PackageCertificateThumbprint>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <AppInstallerUri>F:\winui\Installed</AppInstallerUri>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
 
 	  
 	  
@@ -30,6 +40,7 @@
 	    <WindowsPackageType>None</WindowsPackageType>
 	    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	  -->
+	  
 	  
   </PropertyGroup>
   <ItemGroup>
