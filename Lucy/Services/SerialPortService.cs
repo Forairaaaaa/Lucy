@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lucy.Contracts.Services;
+using Lucy.Helpers;
 
 namespace Lucy.Services;
 public class SerialPortService : ISerialPortService
@@ -136,6 +137,7 @@ public class SerialPortService : ISerialPortService
 
         if (!IsOpened)
         {
+            LastError = "Error_PortNotOpen".GetLocalized();
             return false;
         }
 

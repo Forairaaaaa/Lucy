@@ -126,6 +126,7 @@
         <Button
             Grid.Column="5"
             
+            x:Uid="Button_SendMessage"
             Command="{x:Bind ViewModel.SendMessage}"
         
             CornerRadius="8"
@@ -140,7 +141,6 @@
             FontWeight="Normal"
             FontFamily="Cascadia Code"
             >
-            SEND
         </Button>
 
 

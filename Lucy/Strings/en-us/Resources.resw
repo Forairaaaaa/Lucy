@@ -179,4 +179,13 @@
   <data name="ToolTip_PortIsOpened" xml:space="preserve">
     <value>Opened</value>
   </data>
+  <data name="Button_Clear.Content" xml:space="preserve">
+    <value>CLEAR</value>
+  </data>
+  <data name="Button_SendMessage.Content" xml:space="preserve">
+    <value>SEND</value>
+  </data>
+  <data name="Error_PortNotOpen" xml:space="preserve">
+    <value>Port Not Open</value>
+  </data>
 </root>

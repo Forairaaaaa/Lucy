@@ -63,6 +63,7 @@
             <Button
                 Grid.Column="3"
                 
+                x:Uid="Button_Clear"
                 Command="{x:Bind ViewModel.ClearAll}"
 
                 CornerRadius="8"
@@ -76,8 +77,7 @@
                 FontStyle="Italic"
                 FontWeight="Normal"
                 FontFamily="Cascadia Code"
-            >   
-                CLEAR
+                >
             </Button>
 
 
