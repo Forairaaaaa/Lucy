@@ -152,7 +152,11 @@ public class SerialPortService : ISerialPortService
 
         return true;
     }
-
+        
+    /// <summary>
+    /// Return how many bytes can be read 
+    /// </summary>
+    /// <returns></returns>
     public int Available()
     {
         if (_serialPort.IsOpen)
@@ -163,6 +167,10 @@ public class SerialPortService : ISerialPortService
         return 0;
     }
 
+    /// <summary>
+    /// Read existing data as string
+    /// </summary>
+    /// <returns></returns>
     public string Read()
     {
         if (_serialPort.IsOpen)
@@ -182,5 +190,16 @@ public class SerialPortService : ISerialPortService
         }
 
         return "";
+    }
+
+    /// <summary>
+    /// Check if the port name still exsit 
+    /// Havn't found a better way yet 
+    /// Never mind, just find out checking isOpened works fine :)
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckConnection()
+    {
+        return SerialPort.GetPortNames().Contains(PortName);
     }
 }

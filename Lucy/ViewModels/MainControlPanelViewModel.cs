@@ -47,6 +47,9 @@ namespace Lucy.ViewModels
 
         public string ErrorBuffer;
 
+        // Compare to actaul port state for connection checking 
+        private bool _isOpenedAssume;
+
         public ICommand UpdateAvailablePorts
         {
             get;
@@ -100,6 +103,7 @@ namespace Lucy.ViewModels
             openPortButtonContent = GetOpenPortButtonContent();
             openPortButtonToolTip = GetOpenPortButtonToolTip();
             ErrorBuffer = string.Empty;
+            _isOpenedAssume = _serialPortService.IsOpened;
 
             // Available ports flyout
             availablePortsFlyout = new MenuFlyout();
@@ -294,12 +298,32 @@ namespace Lucy.ViewModels
         {
             OpenPortButtonContent = GetOpenPortButtonContent();
             OpenPortButtonToolTip = GetOpenPortButtonToolTip();
+            _isOpenedAssume = _serialPortService.IsOpened;
         }
 
-        private void PopError()
+        private void PopError(string? custom = null)
         {
-            // Recevie panel's timer will handle this 
-            ErrorBuffer += "🫠 " + _serialPortService.LastError + "\r\n";
+            // Recevie panel's timer tick will handle this 
+            if (custom == null)
+            {
+                ErrorBuffer += "🫠 " + _serialPortService.LastError + "\r\n";
+            }
+            else
+            {
+                ErrorBuffer += "🫠 " + custom + "\r\n";
+            }
+        }
+
+        public void CheckConection()
+        {
+            if (_serialPortService.IsOpened != _isOpenedAssume)
+            {
+                // Update state 
+                UpdateOpenPortButton();
+
+                // Pop error 
+                PopError("lost connection");
+            }
         }
     }
 }

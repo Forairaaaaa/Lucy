@@ -24,7 +24,7 @@ public interface ISerialPortService
 
     string LastError
     {
-        get;
+        get; set;
     }
 
     bool Open();
@@ -36,4 +36,6 @@ public interface ISerialPortService
     int Available();
 
     string Read();
+
+    bool CheckConnection();
 }

@@ -54,6 +54,7 @@ namespace Lucy.Views
                 _isNeedToScroll = false;
             }
 
+            // Handle received message 
             if (ViewModel.SerialPortService.Available() > 0)
             {
                 // Update received message 
@@ -69,6 +70,7 @@ namespace Lucy.Views
                 _isNeedToScroll = true;
             }
 
+            // Handle error 
             if (ViewModel.ErrorBuffer.Length != 0)
             {
                 // Pop error 
@@ -79,6 +81,9 @@ namespace Lucy.Views
 
                 _isNeedToScroll = true;
             }
+
+            // Check connection
+            ViewModel.CheckConection();
         }
     }
 }

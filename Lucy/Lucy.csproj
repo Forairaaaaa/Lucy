@@ -15,7 +15,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <Description>Open Source, Clean Design Serial Monitor Based On WinUI3</Description>
     <PackageIcon>emoji_u1f315.png</PackageIcon>
-    <Version>2023.1.1-beta</Version>
+    <Version>2023.1.1</Version>
     <AssemblyName>Lucy Serial-Monitor</AssemblyName>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <Title>Lucy Serial-Monitor</Title>
