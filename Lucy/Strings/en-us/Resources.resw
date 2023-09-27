@@ -188,4 +188,7 @@
   <data name="Error_PortNotOpen" xml:space="preserve">
     <value>Port Not Open</value>
   </data>
+  <data name="AvatarDefaultUrl" xml:space="preserve">
+    <value>https://pic.imgdb.cn/item/6514280dc458853aef516617.gif</value>
+  </data>
 </root>

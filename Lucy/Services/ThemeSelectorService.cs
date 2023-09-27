@@ -84,7 +84,7 @@ public class ThemeSelectorService : IThemeSelectorService
 
         //Console.WriteLine($"load url get: {url}");
 
-        url ??= "https://media.tenor.com/_RzPjwWKk6YAAAAd/comida.gif";
+        url ??= "AvatarDefaultUrl".GetLocalized();
 
         return url;
     }
