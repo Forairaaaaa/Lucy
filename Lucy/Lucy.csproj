@@ -30,7 +30,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundle>Auto</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <AppInstallerUri>F:\winui\Installed</AppInstallerUri>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppxPackageDir>F:\winui\PackageShit\</AppxPackageDir>
