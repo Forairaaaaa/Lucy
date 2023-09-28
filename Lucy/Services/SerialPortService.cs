@@ -204,4 +204,47 @@ public class SerialPortService : ISerialPortService
     {
         return SerialPort.GetPortNames().Contains(PortName);
     }
+
+    /// <summary>
+    /// Only support color now 
+    /// https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+    /// https://gist.github.com/JBlond/2fea43a3049b38287e5e9cefc87b2124
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    private List<AnsiResult> AnsiEscapeDecode(string message)
+    {
+        var result = new List<AnsiResult>();
+
+        // To simplfy the mixed use situdtion 
+        message = "\u001b[0m" + message;
+
+        // Split messge by Escape (UTF-8)
+        var splitedList = message.Split('\u001b', StringSplitOptions.RemoveEmptyEntries);
+
+        // Get color value and add into list 
+        foreach (var chunk in splitedList)
+        {
+            // If it's empty reset ending 
+            if (chunk.Equals("[0m"))
+                continue;
+
+            // Get value 
+            var messageStartIndex = chunk.IndexOf('m') + 1;
+
+            // Add result 
+            result.Add(new AnsiResult(chunk[..messageStartIndex], chunk[messageStartIndex..]));
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Simple wrap 
+    /// </summary>
+    /// <returns></returns>
+    public List<AnsiResult> ReadWithAnsiDecode()
+    {
+        return AnsiEscapeDecode(Read());
+    }
 }

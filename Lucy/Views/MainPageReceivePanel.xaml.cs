@@ -44,6 +44,7 @@ namespace Lucy.Views
         }
 
         private bool _isNeedToScroll = false;
+        private List<AnsiResult> _ansiResultList = new();
 
         private void UpdateReceivedMessage(object? sender, object e)
         {
@@ -57,8 +58,24 @@ namespace Lucy.Views
             // Handle received message 
             if (ViewModel.SerialPortService.Available() > 0)
             {
-                // Update received message 
-                ViewModel.ReceivedMessageBuffer += ViewModel.SerialPortService.Read();
+                //// Update received message with out ansi decode 
+                //ViewModel.ReceivedMessageBuffer += ViewModel.SerialPortService.Read();
+
+
+
+                // Update received message with ANSI decode 
+                _ansiResultList = ViewModel.SerialPortService.ReadWithAnsiDecode();
+
+                foreach (var ansiResult in _ansiResultList)
+                {
+                    ViewModel.ReceivedMessageBuffer += ansiResult.Message;
+
+                    // TODO
+                    // Change text with color 
+                }
+
+
+
                 ViewModel.UpdateIoStatusLabel();
 
                 // Scroll to bottom 

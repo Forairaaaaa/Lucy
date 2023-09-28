@@ -38,4 +38,28 @@ public interface ISerialPortService
     string Read();
 
     bool CheckConnection();
+
+    List<AnsiResult> ReadWithAnsiDecode();
+}
+
+/// <summary>
+/// Decode result 
+/// </summary>
+public class AnsiResult
+{
+    public string Value
+    {
+        get;
+    }
+
+    public string Message
+    {
+        get;
+    }
+
+    public AnsiResult(string value, string message)
+    {
+        Value = value;
+        Message = message;
+    }
 }
