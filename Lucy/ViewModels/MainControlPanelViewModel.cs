@@ -45,6 +45,8 @@ namespace Lucy.ViewModels
 
         public string ErrorBuffer;
 
+        public bool ClearFlag;
+
         // Compare to actaul port state for connection checking 
         private bool _isOpenedAssume;
 
@@ -98,6 +100,7 @@ namespace Lucy.ViewModels
             openPortButtonToolTip = GetOpenPortButtonToolTip();
             ErrorBuffer = string.Empty;
             _isOpenedAssume = _serialPortService.IsOpened;
+            ClearFlag = false;
 
             // Available ports flyout
             availablePortsFlyout = new MenuFlyout();
@@ -244,6 +247,9 @@ namespace Lucy.ViewModels
         private void OnClearAll()
         {
             _serialPortService.ClearCountNum();
+
+            // Set flag to notive reveice timer
+            ClearFlag = true;
 
             // Update status label
             UpdateIoStatusLabel();
