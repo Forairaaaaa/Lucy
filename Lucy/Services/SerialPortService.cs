@@ -81,6 +81,38 @@ public class SerialPortService : ISerialPortService
     }
 
     /// <summary>
+    /// Seems the GetPortNames() is not 100% available
+    /// We have to check by our self 
+    /// https://stackoverflow.com/questions/33401217/serialport-getportnames-returns-same-port-multiple-times
+    /// </summary>
+    /// <returns></returns>
+    public List<string> AvailablePorts()
+    {
+        var availablePorts = new List<string>();
+
+        foreach (var port in SerialPort.GetPortNames())
+        {
+            // Try open 
+            try
+            {
+                var testPort = new SerialPort();
+                testPort.PortName = port;
+                testPort.Open();
+                testPort.Close();
+                testPort.Dispose();
+
+                availablePorts.Add(port);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"try open {0} {1}", port, ex.Message);
+            }
+        }
+
+        return availablePorts;
+    }
+
+    /// <summary>
     /// Open port 
     /// </summary>
     /// <returns></returns>
