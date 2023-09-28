@@ -117,8 +117,6 @@ namespace Lucy.ViewModels
 
             // Get available ports
             var availableSerialPorts = SerialPort.GetPortNames();
-            //var availableSerialPorts = _serialPortService.AvailablePorts();
-
 
             foreach (var portName in availableSerialPorts)
             {
@@ -217,7 +215,6 @@ namespace Lucy.ViewModels
 
             return availableBaudRateFlyout;
         }
-        
 
         private void OnSendMessage()
         {

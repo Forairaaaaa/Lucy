@@ -37,8 +37,6 @@ public interface ISerialPortService
         get;
     }
 
-    List<string> AvailablePorts();
-
     bool Open();
 
     bool Close();
