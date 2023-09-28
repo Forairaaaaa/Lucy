@@ -65,17 +65,13 @@ namespace Lucy.Views
 
                 // Update received message with ANSI decode 
                 _ansiResultList = ViewModel.SerialPortService.ReadWithAnsiDecode();
-
                 foreach (var ansiResult in _ansiResultList)
                 {
-                    ViewModel.ReceivedMessageBuffer += ansiResult.Message;
-
-                    // TODO
-                    // Change text with color 
+                    ReceivePanelPopMessage(ansiResult.Message);
                 }
 
 
-
+                // Update status label 
                 ViewModel.UpdateIoStatusLabel();
 
                 // Scroll to bottom 
@@ -91,7 +87,8 @@ namespace Lucy.Views
             if (ViewModel.ErrorBuffer.Length != 0)
             {
                 // Pop error 
-                ViewModel.ReceivedMessageBuffer += ViewModel.ErrorBuffer;
+                //ViewModel.ReceivedMessageBuffer += ViewModel.ErrorBuffer;
+                ReceivePanelPopMessage(ViewModel.ErrorBuffer);
 
                 // Empty buffer 
                 ViewModel.ErrorBuffer = string.Empty;
@@ -101,6 +98,20 @@ namespace Lucy.Views
 
             // Check connection
             ViewModel.CheckConection();
+        }
+
+        private void ReceivePanelPopMessage(string message)
+        {
+            // Create an run 
+            var run = new Run
+            {
+                // TODO 
+                // Change color or some shit 
+                Text = message
+            };
+
+            // Add into text block 
+            TextBlockReceivedMessage.Inlines.Add(run);
         }
     }
 }

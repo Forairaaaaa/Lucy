@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lucy.Contracts.Services;
 using Lucy.Helpers;
+using WinUIEx.Messaging;
 
 namespace Lucy.Services;
 public class SerialPortService : ISerialPortService
@@ -40,6 +41,14 @@ public class SerialPortService : ISerialPortService
         set;
     }
 
+    public int SendedMessageNum => _sendedMessageNum;
+
+    public int ReceivedMessageNum => _receivedMessageNum;
+
+    private int _sendedMessageNum;
+
+    private int _receivedMessageNum;
+
     // Serial port 
     private readonly SerialPort _serialPort;
 
@@ -67,6 +76,8 @@ public class SerialPortService : ISerialPortService
         PortName = "COM1";
         BaudRate = "115200";
         LastError = string.Empty;
+        _sendedMessageNum = 0;
+        _receivedMessageNum = 0;
     }
 
     /// <summary>
@@ -121,6 +132,12 @@ public class SerialPortService : ISerialPortService
         return true;
     }
 
+    public void ClearCountNum()
+    {
+        _sendedMessageNum = 0;
+        _receivedMessageNum = 0;
+    }
+
     /// <summary>
     /// Write message
     /// </summary>
@@ -152,6 +169,9 @@ public class SerialPortService : ISerialPortService
             return false;
         }
 
+        // Update counting num 
+        _sendedMessageNum += message.Length;
+
         return true;
     }
         
@@ -181,7 +201,12 @@ public class SerialPortService : ISerialPortService
             {
                 if (_serialPort.BytesToRead > 0)
                 {
-                    return _serialPort.ReadExisting();
+                    var result = _serialPort.ReadExisting();
+
+                    // Update counting num 
+                    _receivedMessageNum += result.Length;
+
+                    return result;
                 }
             }
             catch (Exception ex)
@@ -195,17 +220,6 @@ public class SerialPortService : ISerialPortService
     }
 
     /// <summary>
-    /// Check if the port name still exsit 
-    /// Havn't found a better way yet 
-    /// Never mind, just find out checking isOpened works fine :)
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckConnection()
-    {
-        return SerialPort.GetPortNames().Contains(PortName);
-    }
-
-    /// <summary>
     /// Only support color now 
     /// https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
     /// https://gist.github.com/JBlond/2fea43a3049b38287e5e9cefc87b2124
@@ -216,7 +230,7 @@ public class SerialPortService : ISerialPortService
     {
         var result = new List<AnsiResult>();
 
-        // To simplfy the mixed use situdtion 
+        // To simplfy the mixed use situation 
         message = "\u001b[0m" + message;
 
         // Split messge by Escape (UTF-8)

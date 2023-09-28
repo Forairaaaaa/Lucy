@@ -27,6 +27,16 @@ public interface ISerialPortService
         get; set;
     }
 
+    int SendedMessageNum
+    {
+        get;
+    }
+
+    int ReceivedMessageNum
+    {
+        get;
+    }
+
     bool Open();
 
     bool Close();
@@ -37,7 +47,7 @@ public interface ISerialPortService
 
     string Read();
 
-    bool CheckConnection();
+    void ClearCountNum();
 
     List<AnsiResult> ReadWithAnsiDecode();
 }

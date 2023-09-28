@@ -35,9 +35,6 @@ namespace Lucy.ViewModels
         private string sendMessageBuffer;
 
         [ObservableProperty]
-        private string receivedMessageBuffer;
-
-        [ObservableProperty]
         private string ioStatusLabel;
 
         [ObservableProperty]
@@ -71,8 +68,6 @@ namespace Lucy.ViewModels
             get;
         }
 
-        private int _sendedMessageNum;
-
         // Serial port service 
         private readonly ISerialPortService _serialPortService;
 
@@ -98,8 +93,6 @@ namespace Lucy.ViewModels
             selectedBaudRate = _serialPortService.BaudRate;
             availableBaudRateFlyout = GetBaudRateMenuFlyout();
             sendMessageBuffer = string.Empty;
-            receivedMessageBuffer = string.Empty;
-            _sendedMessageNum = 0;
             ioStatusLabel = string.Empty;
             openPortButtonContent = GetOpenPortButtonContent();
             openPortButtonToolTip = GetOpenPortButtonToolTip();
@@ -239,24 +232,18 @@ namespace Lucy.ViewModels
                 return;
             }
 
-            // Update sended message num
-            _sendedMessageNum += SendMessageBuffer.Length;
+            // Update status label 
             UpdateIoStatusLabel();
         }
 
         public void UpdateIoStatusLabel()
         {
-            IoStatusLabel = ReceivedMessageBuffer.Length.ToString() + " - " + _sendedMessageNum.ToString();
-            //Console.WriteLine( IoStatusLabel );
+            IoStatusLabel = _serialPortService.ReceivedMessageNum.ToString() + " - " + _serialPortService.SendedMessageNum.ToString();
         }
 
         private void OnClearAll()
         {
-            // Clear sended messages
-            _sendedMessageNum = 0;
-
-            // Clear received messages 
-            ReceivedMessageBuffer = "";
+            _serialPortService.ClearCountNum();
 
             // Update status label
             UpdateIoStatusLabel();

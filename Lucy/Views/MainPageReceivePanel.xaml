@@ -27,12 +27,10 @@
             IsTabStop="True"
             >
 
-            <!-- Text="{x:Bind ViewModel.ReceivedMessage, Mode=OneWay}" -->
+            <!-- Text="{x:Bind ViewModel.ReceivedMessageBuffer, Mode=OneWay}" -->
             <TextBlock
                 x:Name="TextBlockReceivedMessage"
                 Padding="18, 0, 18, 0"
-                
-                Text="{x:Bind ViewModel.ReceivedMessageBuffer, Mode=OneWay}"
                 
                 IsTextSelectionEnabled="True"
     
