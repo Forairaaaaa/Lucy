@@ -13,6 +13,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+
 namespace Lucy;
 
 // To learn more about WinUI 3, see https://docs.microsoft.com/windows/apps/winui/winui3/.
@@ -98,6 +102,10 @@ public partial class App : Application
         Build();
 
         UnhandledException += App_UnhandledException;
+
+
+        AppCenter.Start("2042078e-fc73-4d72-860a-ad384bb981b2",
+                  typeof(Analytics), typeof(Crashes));
     }
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
