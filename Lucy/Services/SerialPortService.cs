@@ -52,14 +52,6 @@ public class SerialPortService : ISerialPortService
     // Serial port 
     private readonly SerialPort _serialPort;
 
-    //// Reading flag 
-    //private bool _isReading = false;
-    //// Reading thread 
-    //private Thread? _readingThread;
-
-    //// Message received event handler 
-    //public event EventHandler<string>? MessageReceived;
-
     /// <summary>
     /// Constructor 
     /// </summary>
@@ -260,5 +252,32 @@ public class SerialPortService : ISerialPortService
     public List<AnsiResult> ReadWithAnsiDecode()
     {
         return AnsiEscapeDecode(Read());
+    }
+
+    public string[] BaudRateList()
+    {
+        string[] baudRatesList = {
+            "300",
+            "600",
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "14400",
+            "19200",
+            "38400",
+            "56000",
+            "57600",
+            "115200",
+            "128000",
+            "256000",
+            "460800",
+            "512000",
+            "750000",
+            "921600",
+            "1500000",
+        };
+
+        return baudRatesList;
     }
 }

@@ -37,6 +37,8 @@ public interface ISerialPortService
         get;
     }
 
+    string[] BaudRateList();
+
     bool Open();
 
     bool Close();

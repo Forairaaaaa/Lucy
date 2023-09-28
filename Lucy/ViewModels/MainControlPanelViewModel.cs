@@ -134,6 +134,10 @@ namespace Lucy.ViewModels
             }
         }
 
+        /// <summary>
+        /// Port list flyout 
+        /// </summary>
+        /// <param name="selectedPortName"></param>
         private void OnUpdateSelectedPort(string selectedPortName)
         {
             // If already opened 
@@ -167,34 +171,16 @@ namespace Lucy.ViewModels
             }
         }
 
+        /// <summary>
+        /// Baudrate list flyout 
+        /// </summary>
+        /// <returns></returns>
         private MenuFlyout GetBaudRateMenuFlyout()
         {
             var availableBaudRateFlyout = new MenuFlyout();
             availableBaudRateFlyout.Placement = Microsoft.UI.Xaml.Controls.Primitives.FlyoutPlacementMode.Bottom;
 
-            string[] baudRatesList = {
-                "300",
-                "600",
-                "1200",
-                "2400",
-                "4800",
-                "9600",
-                "14400",
-                "19200",
-                "38400",
-                "56000",
-                "57600",
-                "115200",
-                "128000",
-                "256000",
-                "460800",
-                "512000",
-                "750000",
-                "921600",
-                "1500000",
-            };
-
-            foreach (var baudRate in baudRatesList)
+            foreach (var baudRate in _serialPortService.BaudRateList())
             {
                 // New item
                 var newFlyoutItem = new MenuFlyoutItem();
