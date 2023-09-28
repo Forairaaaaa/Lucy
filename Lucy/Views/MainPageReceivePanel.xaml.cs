@@ -16,6 +16,7 @@ using Lucy.ViewModels;
 using Microsoft.UI.Xaml.Documents;
 using Lucy.Contracts.Services;
 using static System.Net.Mime.MediaTypeNames;
+using Lucy.Services;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,14 +32,18 @@ namespace Lucy.Views
 
         private readonly DispatcherTimer _updateReceivedMessageTimer;
 
+        private bool _isNeedToScroll = false;
+
+        private readonly AnsiDecodeService _ansiDecodeService;
+
         public MainPageReceivePanel()
         {
             // Use control panel's view model too 
             ViewModel = App.GetService<MainControlPanelViewModel>();
             this.InitializeComponent();
 
-            // Init color map
-            _ansiColorMap = GetAnsiColorMap();
+            // Init decode service 
+            _ansiDecodeService = new AnsiDecodeService();
 
             // Setup timer 
             _updateReceivedMessageTimer = new DispatcherTimer();
@@ -47,9 +52,11 @@ namespace Lucy.Views
             _updateReceivedMessageTimer.Start();
         }
 
-        private bool _isNeedToScroll = false;
-        private List<AnsiResult> _ansiResultList = new();
-
+        /// <summary>
+        /// Timer tick to update received messages, errors and clear event  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateReceivedMessage(object? sender, object e)
         {
             if (_isNeedToScroll)
@@ -73,10 +80,8 @@ namespace Lucy.Views
                 //ReceivePanelPopMessage(ViewModel.SerialPortService.Read());
 
 
-
                 // Update received message with ANSI decode 
-                _ansiResultList = ViewModel.SerialPortService.ReadWithAnsiDecode();
-                foreach (var ansiResult in _ansiResultList)
+                foreach (var ansiResult in _ansiDecodeService.AnsiEscapeDecode(ViewModel.SerialPortService.Read()))
                 {
                     //ReceivePanelPopMessage(ansiResult.Message);
                     ReceivePanelPopMessage(ansiResult.Message, ansiResult.Value);
@@ -124,7 +129,7 @@ namespace Lucy.Views
             run.Text = message;
 
             // Get ANSI color 
-            var colorBrush = GetAnsiColorBrush(ansiValue);
+            var colorBrush = _ansiDecodeService.GetAnsiColorBrush(ansiValue);
             if (colorBrush != null)
             {
                 run.Foreground = colorBrush;
@@ -132,50 +137,6 @@ namespace Lucy.Views
 
             // Add into text block 
             TextBlockReceivedMessage.Inlines.Add(run);
-        }
-
-        private readonly Dictionary<string, SolidColorBrush> _ansiColorMap;
-
-        private SolidColorBrush? GetAnsiColorBrush(string? ansiValue)
-        {
-            if (ansiValue == null)
-            {
-                return null;
-            }
-
-            // Check exist 
-            SolidColorBrush? result;
-            if (_ansiColorMap.TryGetValue(ansiValue, out result))
-            {
-                return result;
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Bind ANSI value to color brush 
-        /// https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#color-codes
-        /// </summary>
-        /// <returns></returns>
-        private Dictionary<string, SolidColorBrush> GetAnsiColorMap()
-        {
-            var map = new Dictionary<string, SolidColorBrush>();
-
-            // TODO 
-            // This shit looks suck
-            // Miss material already :(
-            //map.Add("[0;30m", new SolidColorBrush(Microsoft.UI.Colors.White));
-            //map.Add("[0;31m", new SolidColorBrush(Microsoft.UI.Colors.Red));
-            //map.Add("[0;32m", new SolidColorBrush(Microsoft.UI.Colors.Green));
-            //map.Add("[0;33m", new SolidColorBrush(Microsoft.UI.Colors.Yellow));
-            //map.Add("[0;34m", new SolidColorBrush(Microsoft.UI.Colors.Blue));
-            //map.Add("[0;35m", new SolidColorBrush(Microsoft.UI.Colors.Magenta));
-            //map.Add("[0;36m", new SolidColorBrush(Microsoft.UI.Colors.Cyan));
-            //map.Add("[0;37m", new SolidColorBrush(Microsoft.UI.Colors.White));
-            //map.Add("[0m", new SolidColorBrush(Microsoft.UI.Colors.White));
-
-            return map;
         }
     }
 }
