@@ -14,7 +14,11 @@ Clean Design Serial Monitor, Base On WinUI3
 
 ![](https://github.com/Forairaaaaa/Lucy/blob/master/GitPics/display5.png?raw=true)
 
-#### TODO:
+#### Install Guide:
+
+- [MSIX](https://github.com/Forairaaaaa/Lucy/blob/master/Guides/Install.md#msix)
+
+#### Todo List:
 
 - [ ] ANSI color support
 - [ ] Data bits, Parity... configs
