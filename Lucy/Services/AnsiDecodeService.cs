@@ -50,15 +50,16 @@ internal class AnsiDecodeService
         // TODO 
         // This shit looks suck
         // Miss material already :(
-        //map.Add("[0;30m", new SolidColorBrush(Microsoft.UI.Colors.White));
-        //map.Add("[0;31m", new SolidColorBrush(Microsoft.UI.Colors.Red));
-        //map.Add("[0;32m", new SolidColorBrush(Microsoft.UI.Colors.Green));
-        //map.Add("[0;33m", new SolidColorBrush(Microsoft.UI.Colors.Yellow));
-        //map.Add("[0;34m", new SolidColorBrush(Microsoft.UI.Colors.Blue));
-        //map.Add("[0;35m", new SolidColorBrush(Microsoft.UI.Colors.Magenta));
-        //map.Add("[0;36m", new SolidColorBrush(Microsoft.UI.Colors.Cyan));
-        //map.Add("[0;37m", new SolidColorBrush(Microsoft.UI.Colors.White));
-        //map.Add("[0m", new SolidColorBrush(Microsoft.UI.Colors.White));
+
+        map.Add("[0;30m", new SolidColorBrush(Microsoft.UI.Colors.White));
+        map.Add("[0;31m", new SolidColorBrush(Microsoft.UI.Colors.Red));
+        map.Add("[0;32m", new SolidColorBrush(Microsoft.UI.Colors.Green));
+        map.Add("[0;33m", new SolidColorBrush(Microsoft.UI.Colors.Yellow));
+        map.Add("[0;34m", new SolidColorBrush(Microsoft.UI.Colors.Blue));
+        map.Add("[0;35m", new SolidColorBrush(Microsoft.UI.Colors.Magenta));
+        map.Add("[0;36m", new SolidColorBrush(Microsoft.UI.Colors.Cyan));
+        map.Add("[0;37m", new SolidColorBrush(Microsoft.UI.Colors.White));
+        map.Add("[0m", new SolidColorBrush(Microsoft.UI.Colors.Black));
 
         return map;
     }

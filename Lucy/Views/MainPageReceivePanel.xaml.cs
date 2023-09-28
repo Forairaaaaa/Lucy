@@ -21,6 +21,9 @@ using Lucy.Services;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+// [BUG LIST]
+// 1.No frame ending detection, may causing incorrect ANSI decode 
+
 namespace Lucy.Views
 {
     public sealed partial class MainPageReceivePanel : UserControl
@@ -71,21 +74,22 @@ namespace Lucy.Views
             {
                 ViewModel.ClearFlag = false;
                 TextBlockReceivedMessage.Inlines.Clear();
+                TextBlockReceivedMessage.Text = string.Empty;
             }
 
             // Handle received message 
             if (ViewModel.SerialPortService.Available() > 0)
             {
-                //// Update received message with out ansi decode 
-                //ReceivePanelPopMessage(ViewModel.SerialPortService.Read());
+                // Update received message with out ansi decode 
+                ReceivePanelPopMessage(ViewModel.SerialPortService.Read());
 
 
-                // Update received message with ANSI decode 
-                foreach (var ansiResult in _ansiDecodeService.AnsiEscapeDecode(ViewModel.SerialPortService.Read()))
-                {
-                    //ReceivePanelPopMessage(ansiResult.Message);
-                    ReceivePanelPopMessage(ansiResult.Message, ansiResult.Value);
-                }
+                //// Update received message with ANSI decode 
+                //foreach (var ansiResult in _ansiDecodeService.AnsiEscapeDecode(ViewModel.SerialPortService.Read()))
+                //{
+                //    ReceivePanelPopMessageAnsi(ansiResult.Message);
+                //    //ReceivePanelPopMessageAnsi(ansiResult.Message, ansiResult.Value);
+                //}
 
 
                 // Update status label 
@@ -118,10 +122,19 @@ namespace Lucy.Views
         }
 
         /// <summary>
+        /// Basic pop message 
+        /// </summary>
+        /// <param name="messsage"></param>
+        private void ReceivePanelPopMessage(string messsage)
+        {
+            TextBlockReceivedMessage.Text += messsage;
+        }
+
+        /// <summary>
         /// Pop message by adding Run under Inlines 
         /// </summary>
         /// <param name="message"></param>
-        private void ReceivePanelPopMessage(string message, string? ansiValue = null)
+        private void ReceivePanelPopMessageAnsi(string message, string? ansiValue = null)
         {
             // Create an run 
             var run = new Run();
